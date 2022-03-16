@@ -18,29 +18,32 @@ router.get("/form_AddDevice", (req, res) => {
 router.post("/insertDevice", (req, res) => {
     console.log(req.body)
     Device.findOne({ DeviceCode: req.body.device_code }).exec((err, doc) => {
-        if (!doc) {
-            let data = new Device({
-                DeviceName: req.body.device_name,
-                CategoryID: req.body.category_id,
-                DeviceCode: req.body.device_code,
-                Room: req.body.room,
-                Price: req.body.price,
-                Date: req.body.date,
-                DeviceStatus: req.body.status
-            })
-            Device.saveDevice(data, (err) => {
-                if (err) {
-                    res.redirect("/form_AddDevice")
-                    console.log(err)
-                }
-                else {
-                    res.redirect("/device")
-                }
-            })
-        }
-        else {
-            res.redirect("/form_AddDevice")
-        }
+        Category.findOne({ _id: req.body.category_id }).exec((err, doc_c) => {
+            if (!doc) {
+                let data = new Device({
+                    CategoryID: req.body.category_id,
+                    DeviceName: req.body.device_name,
+                    CategoryName: doc_c.CategoryName,
+                    DeviceCode: req.body.device_code,
+                    Room: req.body.room,
+                    Price: req.body.price,
+                    Date: req.body.date,
+                    DeviceStatus: req.body.status
+                })
+                Device.saveDevice(data, (err) => {
+                    if (err) {
+                        res.redirect("/form_AddDevice")
+                        console.log(err)
+                    }
+                    else {
+                        res.redirect("/device")
+                    }
+                })
+            }
+            else {
+                res.redirect("/form_AddDevice")
+            }
+        })
     })
 })
 

@@ -10,8 +10,9 @@ mongoose.connect(dbUrl, {
 
 // design Schema
 let deviceSchema = mongoose.Schema({
-    DeviceName: String,
     CategoryID: { type: mongoose.Schema.Types.ObjectId, ref: 'categorys' },
+    DeviceName: String,
+    CategoryName: String,
     DeviceCode: String,
     Room: String,
     Price: Number,
