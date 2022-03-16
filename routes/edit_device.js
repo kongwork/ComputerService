@@ -10,7 +10,15 @@ router.post("/editDevice", (req, res) => {
     if (req.session.login) {
         Device.findOne({ _id: edit_device }).exec((err, doc_d) => {
             Category.find().exec((err, doc_c) => {
-                res.render("edit_device", { devices: doc_d, categorys: doc_c, showname: showname })
+                Category.findOne({ _id: doc_d.CategoryID }).exec((err, cate) => {
+                    res.render("edit_device", { 
+                        cate: cate,
+                        lookup: doc_lookup,
+                        devices: doc_d,
+                        categorys: doc_c,
+                        showname: showname
+                    })
+                })
             })
         })
     }
