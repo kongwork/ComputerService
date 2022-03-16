@@ -1,11 +1,16 @@
 const express = require("express")
+const Device = require("../models/device")
 const router = express.Router()
 
 router.get("/device", (req, res) => {
     const showname = req.session.username
     if (req.session.login && req.session.typeUser === 'Admin') {
         let order = 1
-        let MongoClient = require('mongodb').MongoClient;
+        Device.find().exec((err, doc) => {
+            res.render("device", { devices: doc, order: order, showname: showname })
+        })
+        //แสดงผลหน้า Template <%= JSON.stringify(item.details,[ 'details', 'CategoryName']).slice(18,-3); %>
+        /*let MongoClient = require('mongodb').MongoClient;
         let url = "mongodb://localhost:27017/";
 
         MongoClient.connect(url, function (err, db) {
@@ -27,7 +32,7 @@ router.get("/device", (req, res) => {
                 console.log(JSON.stringify(res, ['_id', 'details', 'CategoryName']));
                 db.close();
             });
-        });
+        });*/
     }
     else {
         res.redirect('/')
