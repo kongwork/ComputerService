@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const Category = require("../models/category")
+const Device = require("../models/device")
 
 
 router.post("/editCategory", (req, res) => {
@@ -25,8 +26,10 @@ router.post("/updateCategory", (req, res) => {
     }
     // อัพเดตข้อมูล Category
     Category.findByIdAndUpdate(update_category, data, { useFindAndModify: false }).exec(err => {
-        console.log(req.body)
-        res.redirect("/category")
+        Device.updateMany({CategoryID:update_category}, data).exec(err => {
+            console.log(req.body)
+            res.redirect("/category")
+        })
     })
 })
 

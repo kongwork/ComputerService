@@ -13,7 +13,7 @@ router.post("/editDevice", (req, res) => {
                 Category.findOne({ _id: doc_d.CategoryID }).exec((err, cate) => {
                     res.render("edit_device", { 
                         cate: cate,
-                        lookup: doc_lookup,
+                        /*lookup: doc_lookup,*/
                         devices: doc_d,
                         categorys: doc_c,
                         showname: showname
@@ -30,14 +30,22 @@ router.post("/editDevice", (req, res) => {
 // Update Data Device
 router.post("/updateDevice", (req, res) => {
     // ข้อมูลใหม่ที่ส่งมาจาก form edit
-    const update_device = req.body.device_id
-    let data = {
-        CategoryName: req.body.category
-    }
-    // อัพเดตข้อมูล Device
-    Device.findByIdAndUpdate(update_device, data, { useFindAndModify: false }).exec(err => {
-        console.log(req.body)
-        res.redirect("/device")
+    Category.findOne({ _id: req.body.category_id }).exec((err, doc_c) => {
+        let data = {
+            CategoryID: req.body.category_id,
+            DeviceName: req.body.device_name,
+            CategoryName: doc_c.CategoryName,
+            DeviceCode: req.body.device_code,
+            Room: req.body.room,
+            Price: req.body.price,
+            Date: req.body.date,
+            DeviceStatus: req.body.status
+        }
+        // อัพเดตข้อมูล Device
+        Device.findByIdAndUpdate( req.body.device_id, data, { useFindAndModify: false } ).exec(err => {
+            console.log(req.body)
+            res.redirect("/device")
+        })
     })
 })
 
