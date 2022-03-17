@@ -24,6 +24,8 @@ const Device = require("./routes/device")
 const AddDevice = require("./routes/form_AddDevice")
 const delete_device = require("./routes/delete_device")
 const edit_device = require("./routes/edit_device")
+// Maintenance
+const Maintenance = require("./routes/maintenance")
 
 // For user
 // Device
@@ -67,6 +69,9 @@ app.use(
     AddDevice,
     delete_device,
     edit_device,
+
+    // Maintenance
+    Maintenance,
 
     // For User
     // User
