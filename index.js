@@ -30,9 +30,10 @@ const Maintenance = require("./routes/maintenance")
 // For user
 // Device
 const User_Device = require("./routes/user_device")
-
 // Category
 const User_Category = require("./routes/user_category")
+// Inform
+const Inform = require("./routes/inform")
 
 const app = express()
 
@@ -76,7 +77,10 @@ app.use(
     // For User
     // User
     User_Device,
-    User_Category
+    User_Category,
+
+    // Inform
+    Inform
 )
 app.use(express.static(path.join(__dirname, 'public')))
 
