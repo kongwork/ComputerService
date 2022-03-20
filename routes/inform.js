@@ -2,9 +2,10 @@ const express = require("express")
 const router = express.Router()
 const Device = require("../models/device")
 const Category = require("../models/category")
+const Maintenance = require("../models/maintenance")
 
 
-router.post("/inform", (req, res) => {
+router.post("/user_device/inform", (req, res) => {
     const edit_device = req.body.edit_device
     const showname = req.session.username
     if (req.session.login) {
@@ -13,7 +14,6 @@ router.post("/inform", (req, res) => {
                 Category.findOne({ _id: doc_d.CategoryID }).exec((err, cate) => {
                     res.render("inform", {
                         cate: cate,
-                        /*lookup: doc_lookup,*/
                         devices: doc_d,
                         categorys: doc_c,
                         showname: showname
@@ -27,25 +27,28 @@ router.post("/inform", (req, res) => {
     }
 })
 
-// Update Data Device
-router.post("/updateDevice", (req, res) => {
-    // ข้อมูลใหม่ที่ส่งมาจาก form edit
-    Category.findOne({ _id: req.body.category_id }).exec((err, doc_c) => {
-        let data = {
-            CategoryID: req.body.category_id,
-            DeviceName: req.body.device_name,
-            CategoryName: doc_c.CategoryName,
-            DeviceCode: req.body.device_code,
-            Room: req.body.room,
-            Price: req.body.price,
-            Date: req.body.date,
-            DeviceStatus: req.body.status
+router.post("/updateInform", (req, res) => {
+    Maintenance.findOne({ DeviceID: req.body.device_code }).exec((err, doc) => {
+        if (!doc) {
+            let data = new Maintenance({
+                UserID: req.session.userid,
+                DeviceID: req.body.device_code,
+                DeviceName: req.body.device_name,
+                MTN_Status: 'รอดำเนินการ',
+                MTN_Room: req.body.room,
+                MTN_Date: Date.now(),
+                MTN_CheckDate: '',
+                MTN_Img: req.body.MTN_Img,
+                MTN_Detail: req.body.MTN_Detail
+            })
+            Maintenance.saveMaintenance(data, (err) => {
+                if (err) console.log(err)
+                res.redirect("/user_device")
+            })
         }
-        // อัพเดตข้อมูล Device
-        Device.findByIdAndUpdate(req.body.device_id, data, { useFindAndModify: false }).exec(err => {
-            console.log(req.body)
-            res.redirect("/device")
-        })
+        else {
+            
+        }
     })
 })
 

@@ -11,12 +11,14 @@ mongoose.connect(dbUrl, {
 // design Schema
 let maintenanceSchema = mongoose.Schema({
     UserID: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
-    DeviceID: { type: mongoose.Schema.Types.ObjectId, ref: 'devices' },
-    MaintenanceRoom: String,
-    MaintenanceDate: Date,
-    MaintenanceImg: String,
-    DeviceStatus: String,
-    MaintenanceDetail: String
+    DeviceID: String,
+    DeviceName: String,
+    MTN_Status: String,
+    MTN_Room: String,
+    MTN_Date: Date,
+    MTN_CheckDate: Date,
+    MTN_Img: String,
+    MTN_Detail: String
 });
 
 // create model

@@ -28,6 +28,8 @@ const edit_device = require("./routes/edit_device")
 const Maintenance = require("./routes/maintenance")
 
 // For user
+// List Inform
+const ListInform = require("./routes/list_inform")
 // Device
 const User_Device = require("./routes/user_device")
 // Category
@@ -51,35 +53,26 @@ app.use(
     logout,
 
     // For Admin 
-    // User
     user,
     AddUser,
     delete_user,
     edit_user,
     SearchUser,
-
-    // Category
     Category,
     AddCategory,
     delete_category,
     SearchCategory,
     edit_category,
-
-    // Device
     Device,
     AddDevice,
     delete_device,
     edit_device,
-
-    // Maintenance
     Maintenance,
 
     // For User
-    // User
+    ListInform,
     User_Device,
     User_Category,
-
-    // Inform
     Inform
 )
 app.use(express.static(path.join(__dirname, 'public')))

@@ -13,6 +13,7 @@ router.post('/login', (req, res) => {
         }
         else {
             if (username === doc.UserName && password === doc.Password && doc.TypeUser === 'User') {
+                req.session.userid = doc._id
                 req.session.username = username
                 req.session.password = password
                 req.session.typeUser = 'User'

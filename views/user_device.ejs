@@ -19,7 +19,7 @@
         <div class="d-flex">
             <nav class="nav flex-column" style="background-color: white; width: 350px; height: 900px; padding: 25px 30px 0 30px;">
                 <p style="font-size: 20px; text-align: center;"><b>Menu</b></p>
-                <a class="nav-link" href="" style="color: #333333;">รายการแจ้งซ้อมของฉัน</a>
+                <a class="nav-link" href="/list_inform" style="color: #333333;">รายการแจ้งซ้อมของฉัน</a>
                 <a class="nav-link" href="/user_category" style="color: #333333;">หมวดหมู่</a>
                 <a class="nav-link" href="/user_device" style="color: #1a75ff;"><b>อุปกรณ์</b></a>
             </nav>
@@ -59,7 +59,7 @@
                             <td><%= JSON.stringify(item.details,[ 'details', 'CategoryName']).slice(18,-3); %></td>
                             <td><%= item.DeviceStatus %></td>
                             <td>
-                                <form class="d-flex" action="/inform" method="post">
+                                <form class="d-flex" action="/user_device/inform" method="post">
                                     <input type="text" name="edit_device" value="<%= item._id %>" hidden>
                                     <button class="btn btn-warning btn-sm" type="submit">
                                         แจ้งซ่อม
