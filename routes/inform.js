@@ -32,6 +32,7 @@ router.post("/updateInform", (req, res) => {
         if (!doc) {
             let data = new Maintenance({
                 UserID: req.session.userid,
+                UserInform: req.session.username,
                 DeviceID: req.body.device_code,
                 DeviceName: req.body.device_name,
                 MTN_Status: 'รอดำเนินการ',
