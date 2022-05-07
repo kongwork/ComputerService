@@ -6,6 +6,10 @@ const index = require('./routes/index')
 const login = require('./routes/login')
 const logout = require('./routes/logout')
 
+// ForgotPass
+const ForgotPass = require('./routes/forgot_password')
+const MailResetPass = require('./routes/mail_notify_reset_pass')
+
 // User
 const user = require('./routes/user')
 const AddUser = require("./routes/form_AddUser")
@@ -26,6 +30,7 @@ const delete_device = require("./routes/delete_device")
 const edit_device = require("./routes/edit_device")
 // Maintenance
 const Maintenance = require("./routes/maintenance")
+const edit_maintenance = require("./routes/edit_maintenance")
 
 // For user
 // List Inform
@@ -51,6 +56,8 @@ app.use(
     index,
     login,
     logout,
+    ForgotPass,
+    MailResetPass,
 
     // For Admin 
     user,
@@ -68,6 +75,7 @@ app.use(
     delete_device,
     edit_device,
     Maintenance,
+    edit_maintenance,
 
     // For User
     ListInform,

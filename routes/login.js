@@ -16,6 +16,8 @@ router.post('/login', (req, res) => {
                 req.session.userid = doc._id
                 req.session.username = username
                 req.session.password = password
+                req.session.fname = doc.FirstName
+                req.session.lname = doc.LastName
                 req.session.typeUser = 'User'
                 req.session.login = true
                 res.redirect("/user_category")
@@ -23,6 +25,8 @@ router.post('/login', (req, res) => {
             else if (username === doc.UserName && password === doc.Password && doc.TypeUser === 'Admin') {
                 req.session.username = username
                 req.session.password = password
+                req.session.fname = doc.FirstName
+                req.session.lname = doc.LastName
                 req.session.typeUser = 'Admin'
                 req.session.login = true
                 res.redirect("/user")

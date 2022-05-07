@@ -95,7 +95,17 @@
                             <td><%= item.DeviceCode %></td>
                             <td><%= item.DeviceName %></td>
                             <td><%= item.CategoryName %></td>
-                            <td><%= item.DeviceStatus %></td>
+                            <td>
+                                <% if (item.DeviceStatus == 'ใช้งานปกติ' ) { %>
+                                    <span class="badge rounded-pill bg-success">
+                                        <%= item.DeviceStatus %>
+                                    </span>
+                                <% } else { %>
+                                    <span class="badge rounded-pill bg-danger">
+                                        <%= item.DeviceStatus %>
+                                    </span>
+                                <% } %>
+                            </td>
                             <td>
                                 <form class="d-flex" action="/editDevice" method="post">
                                     <input type="text" name="edit_device" value="<%= item._id %>" hidden>
