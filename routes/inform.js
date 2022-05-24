@@ -5,18 +5,21 @@ const Category = require("../models/category")
 const Maintenance = require("../models/maintenance")
 
 
-router.post("/user_device/inform", (req, res) => {
+router.post("/inform", (req, res) => {
     const edit_device = req.body.edit_device
     const showname = req.session.username
     if (req.session.login) {
         Device.findOne({ _id: edit_device }).exec((err, doc_d) => {
-            Category.find().exec((err, doc_c) => {
-                Category.findOne({ _id: doc_d.CategoryID }).exec((err, cate) => {
-                    res.render("inform", {
-                        cate: cate,
-                        devices: doc_d,
-                        categorys: doc_c,
-                        showname: showname
+            Maintenance.findOne({ DeviceID: doc_d.DeviceCode }).exec((err, doc_m) => {
+                Category.find().exec((err, doc_c) => {
+                    Category.findOne({ _id: doc_d.CategoryID }).exec((err, cate) => {
+                        res.render("inform", {
+                            cate: cate,
+                            devices: doc_d,
+                            categorys: doc_c,
+                            checkmtn: doc_m,
+                            showname: showname
+                        })
                     })
                 })
             })
@@ -33,6 +36,9 @@ router.post("/updateInform", (req, res) => {
             let data = new Maintenance({
                 UserID: req.session.userid,
                 UserInform: req.session.username,
+                UserFirstName: req.session.fname,
+                UserLastName: req.session.lname,
+                PhoneNumber: req.session.phone,
                 DeviceID: req.body.device_code,
                 DeviceName: req.body.device_name,
                 MTN_Status: 'รอดำเนินการ',

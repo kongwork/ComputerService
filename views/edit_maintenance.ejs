@@ -57,11 +57,14 @@
                         <div class="col">
                             <div class="col mb-3">
                                 <label class="form-label">ชื่อ-นามสกุล (ผู้แจ้ง)</label>
-                                <input type="text" class="form-control" name="" value="<%= maintenance.UserInform %>">
+                                <input type="text" class="form-control" name="" value="<%= maintenance.UserFirstName %> <%= maintenance.UserLastName %>">
                             </div>
                         </div>
                         <div class="col">
-
+                            <div class="col mb-3">
+                                <label class="form-label">มือถือ</label>
+                                <input type="text" class="form-control" name="" value="<%= maintenance.PhoneNumber %>">
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -99,7 +102,7 @@
                         </div>
                     </div>
                     <br>
-                    <button class="btn btn-primary">อัพเดต</button>
+                    <button class="btn btn-warning">ตรวจเช็คอุปกรณ์</button>
                 </form>
             </div>
         </div>

@@ -11,7 +11,11 @@ router.get("/category", (req, res) => {
     if (req.session.login && req.session.typeUser === 'Admin') {
         let order = 1
         Category.find().exec((err, doc) => {
-            res.render("category", { categorys: doc, order: order, showname: showname })
+            res.render("category", { 
+                categorys: doc,
+                order: order,
+                showname: showname
+            })
         })
     }
     else {

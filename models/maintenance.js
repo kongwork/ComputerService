@@ -12,6 +12,9 @@ mongoose.connect(dbUrl, {
 let maintenanceSchema = mongoose.Schema({
     UserID: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
     UserInform: String,
+    UserFirstName: String,
+    UserLastName: String,
+    PhoneNumber: String,
     DeviceID: String,
     DeviceName: String,
     MTN_Status: String,
