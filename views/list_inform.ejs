@@ -76,8 +76,7 @@
                                 <% } %>
                             </td>
                             <td>
-                                <form class="d-flex" action="/edit" method="post">
-                                    <input type="text" name="edit_user" value="<%= item._id %>" hidden>
+                                <form class="d-flex" action="/inform_detail/<%= item._id %>" method="post">
                                     <button class="btn btn-info btn-sm" type="submit">
                                         Detail
                                     </button>

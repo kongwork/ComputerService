@@ -42,6 +42,7 @@ const User_Device = require("./routes/user_device")
 const User_Category = require("./routes/user_category")
 // Inform
 const Inform = require("./routes/inform")
+const DetailInform = require("./routes/inform_detail")
 //const re = require("./routes/re")
 const report = require("./report/report.js")
 
@@ -87,7 +88,8 @@ app.use(
     Inform,
     //re,
     report,
-    DeleteMaintenance
+    DeleteMaintenance,
+    DetailInform
 )
 app.use(express.static(path.join(__dirname, 'public')))
 
