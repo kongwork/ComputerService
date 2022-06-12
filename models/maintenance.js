@@ -21,8 +21,8 @@ let maintenanceSchema = mongoose.Schema({
     MTN_Room: String,
     MTN_Date: Date,
     MTN_CheckDate: Date,
-    MTN_Img: String,
-    MTN_Detail: String
+    MTN_Detail: String,
+    MTN_Img:[]
 });
 
 // create model

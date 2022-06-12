@@ -4,6 +4,28 @@ const Device = require("../models/device")
 const Category = require("../models/category")
 const Maintenance = require("../models/maintenance")
 
+// อัพโหลดไฟล์
+const multer = require("multer");
+/*const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "./public/uploads"); //ตำแหน่งเก็บไฟล์
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + ".xlsx"); //เปลี่ยนชื่อไฟล์ ้ป้องกันชื่อไฟล์ซ้ำกัน
+    },
+});*/
+const storage_img = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "./public/uploadsIMG"); //ตำแหน่งเก็บไฟล์
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + ".jpg"); //เปลี่ยนชื่อไฟล์ ้ป้องกันชื่อไฟล์ซ้ำกัน
+    },
+});
+
+//const upload = multer({ storage: storage });
+const upload_img = multer({ storage: storage_img }).array("fileimg",3);
+
 
 router.post("/inform", (req, res) => {
     const edit_device = req.body.edit_device
@@ -32,7 +54,77 @@ router.post("/inform", (req, res) => {
 })
 
 router.post("/updateInform", (req, res) => {
-    Maintenance.findOne({ DeviceID: req.body.device_code }).exec((err, doc) => {
+    upload_img(req, res, function (err) {
+        console.log(req.files)
+        if (err) {
+            console.log(err)
+        }
+        else {
+            let data = new Maintenance({
+                UserID: req.session.userid,
+                UserInform: req.session.username,
+                UserFirstName: req.session.fname,
+                UserLastName: req.session.lname,
+                PhoneNumber: req.session.phone,
+                DeviceID: req.body.device_code,
+                DeviceName: req.body.device_name,
+                MTN_Status: '01',
+                MTN_Room: req.body.room,
+                MTN_Date: Date.now(),
+                MTN_CheckDate: '',
+                MTN_Detail: req.body.MTN_Detail,
+                MTN_Img:[]
+            });
+            req.files.map(el => data.MTN_Img.push(el.filename))
+            Maintenance.saveMaintenance(data, (err) => {
+                if (err) console.log(err)
+                res.redirect("/user_device")
+            })
+        }
+        /*else if (req.files.length === 2) {
+            let data = new Maintenance({
+                UserID: req.session.userid,
+                UserInform: req.session.username,
+                UserFirstName: req.session.fname,
+                UserLastName: req.session.lname,
+                PhoneNumber: req.session.phone,
+                DeviceID: req.body.device_code,
+                DeviceName: req.body.device_name,
+                MTN_Status: '01',
+                MTN_Room: req.body.room,
+                MTN_Date: Date.now(),
+                MTN_CheckDate: '',
+                MTN_Detail: req.body.MTN_Detail,
+                MTN_Img:[]
+            });
+            Maintenance.saveMaintenance(data, (err) => {
+                if (err) console.log(err)
+                res.redirect("/user_device")
+            })
+        }
+        else {
+            let data = new Maintenance({
+                UserID: req.session.userid,
+                UserInform: req.session.username,
+                UserFirstName: req.session.fname,
+                UserLastName: req.session.lname,
+                PhoneNumber: req.session.phone,
+                DeviceID: req.body.device_code,
+                DeviceName: req.body.device_name,
+                MTN_Status: '01',
+                MTN_Room: req.body.room,
+                MTN_Date: Date.now(),
+                MTN_CheckDate: '',
+                MTN_Detail: req.body.MTN_Detail,
+                MTN_Img: []
+            });
+            Maintenance.saveMaintenance(data, (err) => {
+                if (err) console.log(err)
+                res.redirect("/user_device")
+            })
+        }*/
+    });
+    /*Maintenance.findOne({ DeviceID: req.body.device_code }).exec((err, doc) => {
         let InsertData = {
             UserID: req.session.userid,
             UserInform: req.session.username,
@@ -62,7 +154,7 @@ router.post("/updateInform", (req, res) => {
                 res.redirect("/user_device")
             })
         }
-    })
+    })*/
 })
 
 module.exports = router;

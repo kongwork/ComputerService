@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-const pdf = require('express-pdf');
 const index = require('./routes/index')
 const login = require('./routes/login')
 const logout = require('./routes/logout')
@@ -32,6 +31,7 @@ const edit_device = require("./routes/edit_device")
 // Maintenance
 const Maintenance = require("./routes/maintenance")
 const CheckMaintenance = require("./routes/CheckMaintenance")
+const DeleteMaintenance = require("./routes/delete_maintenance")
 
 // For user
 // List Inform
@@ -52,7 +52,6 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
-app.use(pdf)
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 app.use(session({ secret: "mysession", resave: false, saveUninitialized: false }))
@@ -87,7 +86,8 @@ app.use(
     User_Category,
     Inform,
     //re,
-    report
+    report,
+    DeleteMaintenance
 )
 app.use(express.static(path.join(__dirname, 'public')))
 

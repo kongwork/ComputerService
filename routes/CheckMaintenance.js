@@ -19,7 +19,7 @@ router.post("/CheckMaintenance", (req, res) => {
 router.post("/ConfirmMaintenance", (req, res) => {
     Maintenance.findOne({ _id: req.body.maintenance_id }).exec((err, doc_c) => {
         let data = {
-            MTN_Detail: req.body.detail
+            MTN_Detail: '03'
         }
         // อัพเดตข้อมูล Device
         Maintenance.findByIdAndUpdate( req.body.maintenance_id, data, { useFindAndModify: false } ).exec(err => {
