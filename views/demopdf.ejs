@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #DDD;
+    }
+
+    tr:hover {
+        background-color: #D6EEEE;
+    }
+</style>
+
+<body>
+
+    <h2 style="text-align: center;">A basic HTML table</h2>
+
+    <table style="width:100%">
+        <tr>
+            <th>คำนำหน้า</th>
+            <th>ชื่อ</th>
+            <th>นามสกุล</th>
+            <th>ชื่อผู้ใช้</th>
+            <th>อีเมล</th>
+            <th>เบอร์โทร</th>
+            <th>สถานะ</th>
+            <th>fgdgdfg</th>
+            <th>สถfdgdfgdfานะ</th>
+        </tr>
+        <% Object.values(data).forEach(function(item){%>
+            <tr>
+                <td style="text-align: center;">
+                    <%= item.Prefix %>
+                </td>
+                <td>
+                    <%= item.FirstName %>
+                </td>
+                <td>
+                    <%= item.LastName %>
+                </td>
+                <td>
+                    <%= item.UserName %>
+                </td>
+                <td>
+                    <%= item.Email %>
+                </td>
+                <td>
+                    <%= item.PhoneNumber %>
+                </td>
+                <td>
+                    <%= item.TypeUser %>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <p>To undestand the example better, we have added borders to the table.</p>
+
+</body>
+
+</html>

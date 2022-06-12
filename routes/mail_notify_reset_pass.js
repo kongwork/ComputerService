@@ -15,7 +15,7 @@ router.post('/send_mail_forgot_pass', (req, res) => {
                 service: "gmail",
                 auth: {
                     user: "kongwork26729@gmail.com",
-                    pass: "nongsa7410",
+                    pass: "",
                 },
             });
 
@@ -23,8 +23,14 @@ router.post('/send_mail_forgot_pass', (req, res) => {
                 from: "kongwork26729@gmail.com",
                 to: doc.Email,
                 subject: "Sending Email using Node.js",
-                text: "That was easy!",
-                html: '<a href="http://localhost:8080/change_pass">Click here to reset your password</a>',
+                html: 
+                `
+                    <div>
+                        <p>สวัสดีท่านผู้เจริญ</p>
+                        <a href="http://localhost:8080/change_pass">Click here to reset your password</a>
+                    </div>
+                    
+                `,
             };
 
             transporter.sendMail(mailOptions, function (error, info) {

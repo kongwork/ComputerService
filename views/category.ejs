@@ -166,6 +166,7 @@
             checkedValue.push(item.value);
         });
         !source.checked ? document.getElementById('deleteArray').value = '' : document.getElementById('deleteArray').value = checkedValue.slice(1);
+        // source.checked ? document.getElementById('deleteArray').value = checkedValue.slice(1) : document.getElementById('deleteArray').value = ''
     }
     function checkDelete() {
         var checkedValue = []; 

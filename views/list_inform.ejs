@@ -69,7 +69,11 @@
                             <td><%= item.DeviceID %></td>
                             <td><%= item.DeviceName %></td>
                             <td>
-                                <span class="badge rounded-pill bg-warning text-dark"><%= item.MTN_Status %></span>
+                                <% if (item.MTN_Status=='01' ) { %>
+                                    <span class="badge rounded-pill bg-warning text-dark">
+                                        รอดำเนินการ
+                                    </span>
+                                <% } %>
                             </td>
                             <td>
                                 <form class="d-flex" action="/edit" method="post">
@@ -80,7 +84,7 @@
                                 </form>
                             </td>
                             <td>
-                                <a class="btn btn-danger btn-sm" href="/delete_user/<%= item._id %>" onclick="return confirm('ต้องการที่จะลบข้อมูล ?')">
+                                <a class="btn btn-danger btn-sm" href="/CanCelInform/<%= item._id %>" onclick="return confirm('ต้องการที่จะลบข้อมูล ?')">
                                     Cancel
                                 </a>
                             </td>

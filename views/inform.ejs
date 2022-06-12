@@ -79,7 +79,8 @@
                     <input type="text" class="form-control" name="" value="<%= devices.DeviceStatus %>" hidden>
                     <input class="form-control" type="date" name="date" value="<%= JSON.stringify(devices.Date).substring(1, 11); %>" hidden>
                     <input type="text" class="form-control" name="room" value="<%= devices.Room %>" hidden>
-                    <% if (checkmtn != null ) { %>
+                    <% if (checkmtn == null) { %>
+                    <% } else if (checkmtn.MTN_Status == '01' && checkmtn != null) { %>
                         <div class="alert alert-warning d-flex align-items-center" role="alert">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                                 class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
@@ -93,7 +94,7 @@
                             </div>
                         </div>
                     <% } %>
-                    
+
                     <div>
                         <br>
                         <div class="mb-3">
@@ -102,11 +103,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">รายละเอียดอาการเสีย</label>
-                            <textarea class="form-control" rows="4" name="MTN_Detail"></textarea>
+                            <textarea class="form-control" rows="4" name="MTN_Detail">คอมกาก</textarea>
                         </div>
                     </div>
                     <br>
-                    <% if (checkmtn == null ) { %>
+                    <% if (checkmtn == null || checkmtn.MTN_Status == '02') { %>
                         <button class="btn btn-warning">
                             แจ้งซ้อม
                         </button>

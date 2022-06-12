@@ -9,7 +9,7 @@ router.get("/list_inform", (req, res) => {
     const showname = req.session.username
     let order = 1
     if (req.session.login && req.session.typeUser === 'User') {
-        Maintenance.find().exec((err, doc) => {
+        Maintenance.find({ MTN_Status: "01" }).exec((err, doc) => {
             res.render('list_inform', {
                 MTN: doc,
                 order: order,
@@ -20,6 +20,13 @@ router.get("/list_inform", (req, res) => {
     else {
         res.redirect('/')
     }
+})
+
+router.get("/CancelInform/:id", (req, res) => {
+    Maintenance.findByIdAndUpdate(req.params.id, { MTN_Status: "02" }).exec(err => {
+        if (err) console.log(err)
+        res.redirect('/list_inform')
+    })
 })
 
 module.exports = router;
