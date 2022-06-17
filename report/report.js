@@ -7,7 +7,7 @@ var options = { format: 'A4' };
 
 router.get('/h', (req, res) => {
     res.render('home')
-});
+})
 
 router.post('/', (req, res) => {
     User.find().exec((err, doc) => {

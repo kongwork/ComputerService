@@ -7,8 +7,9 @@ router.post("/inform_detail/:id", (req, res) => {
     Maintenance.findOne({ _id: req.params.id }).exec((err, doc) => {
         res.render('inform_detail', {
             showname: showname,
-            mtn: doc 
+            mtn: doc
         })
+        console.log(doc.MTN_Img[0])
     })
 })
 

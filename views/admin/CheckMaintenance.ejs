@@ -10,9 +10,18 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="/css/all.css">
     <title>Document</title>
 </head>
+
+<style>
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+    }
+</style>
 
 <body>
     <%- include('navbar') %>
@@ -48,33 +57,45 @@
                 </a>
             </nav>
             <div style="width: 100%; height: 878px; background-color: rgb(245, 245, 245); margin-left: 2px; padding: 50px; overflow: auto;">
-                <h2>Maintenance Detail</h2>
-                <br>
-                <form action="/ConfirmMaintenance" method="post" style="padding: 20px 100px 0 100px;">
-                    <input type="text" name="maintenance_id" value="<%= maintenance._id %>" hidden>
-                    <input type="text" name="user_id" value="<%= maintenance.UserID %>" hidden>
+                <div class="row">
+                    <div class="col">
+                        <h2 style="float: left;">Maintenance Detail</h2>
+                    </div>
+                    <div class="col">
+                        <% if (MTN.MTN_Status == '1' ) { %>
+                            <button class="btn btn-outline-warning" style="float: right;" form="check-device">ตรวจเช็คอุปกรณ์</button>
+                        <% } else if (MTN.MTN_Status == '2' ) { %>
+                            <button class="btn btn-outline-info" style="float: right;" form="check-device">ซ่อมแซมสำเร็จ</button>
+                        <% } else { %>
+
+                        <% } %>
+                    </div>
+                </div>
+                <form id="check-device" action="/ConfirmMaintenance/<%= MTN.UserID %>" method="post" style="padding: 20px 100px 0 100px;">
+                    <input type="text" name="maintenance_id" value="<%= MTN._id %>" hidden>
+                    <input type="text" name="user_id" value="<%= MTN.UserID %>" hidden>
                     <div class="row">
                         <div class="col">
                             <div class="col mb-3">
                                 <label class="form-label">ชื่อ-นามสกุล (ผู้แจ้ง)</label>
-                                <input type="text" class="form-control" name="" value="<%= maintenance.UserFirstName %> <%= maintenance.UserLastName %>">
+                                <input type="text" class="form-control" name="" value="<%= MTN.UserFirstName %> <%= MTN.UserLastName %>">
                             </div>
                         </div>
                         <div class="col">
                             <div class="col mb-3">
                                 <label class="form-label">มือถือ</label>
-                                <input type="text" class="form-control" name="" value="<%= maintenance.PhoneNumber %>">
+                                <input type="text" class="form-control" name="" value="<%= MTN.PhoneNumber %>">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label class="form-label">หมายเลขอุปกรณ์</label>
-                            <input type="text" class="form-control" name="" value="<%= maintenance.DeviceID %>">
+                            <input type="text" class="form-control" name="" value="<%= MTN.DeviceID %>">
                         </div>
                         <div class="col mb-3">
                             <label class="form-label">ชื่ออุปกรณ์</label>
-                            <input type="text" class="form-control" name="room" value="<%= maintenance.DeviceName %>">
+                            <input type="text" class="form-control" name="room" value="<%= MTN.DeviceName %>">
                         </div>
                     </div>
                     <div class="row">
@@ -83,11 +104,11 @@
                                 <div class="col mb-3">
                                     <label class="form-label">วันที่แจ้ง</label>
                                     <input class="form-control" type="date" name=""
-                                        value="<%= JSON.stringify(maintenance.MTN_Date).substring(1, 11); %>">
+                                        value="<%= JSON.stringify(MTN.MTN_Date).substring(1, 11); %>">
                                 </div>
                                 <div class="col mb-3">
                                     <label class="form-label">สถานะ</label>
-                                    <input type="text" class="form-control" name="" value="<%= maintenance.MTN_Status %>">
+                                    <input type="text" class="form-control" name="" value="<%= MTN.MTN_Status %>">
                                 </div>
                             </div>
                         </div>
@@ -98,11 +119,25 @@
                     <div class="row">
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" name="detail" rows="5" ><%= maintenance.MTN_Detail %></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="detail" rows="5" ><%= MTN.MTN_Detail %></textarea>
                         </div>
                     </div>
-                    <br>
-                    <button class="btn btn-warning">ตรวจเช็คอุปกรณ์</button>
+                    <% if (MTN.MTN_Img[0] == undefined) { %>
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                                <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+                                <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
+                            </svg>
+                            <div style="margin-left: 10px;">
+                                <strong>Warning!</strong> ไม่มีรูปภาพ
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <br>
+                        <% for (var i=0; i < MTN.MTN_Img.length; i++) { %>
+                            <img class="mb-3 center" src="/uploadsIMG/<%= MTN.MTN_Img[i] %>" alt="" height="auto">
+                        <% } %>
+                    <% } %>
                 </form>
             </div>
         </div>
