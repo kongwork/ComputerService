@@ -16,6 +16,7 @@ router.get("/user", (req, res) => {
                 fname: fname,
                 lname: lname
             })
+            console.log(req.session)
         })
     }
     else {
