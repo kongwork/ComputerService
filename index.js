@@ -11,7 +11,7 @@ const ForgotPass = require('./routes/forgot_password')
 const MailResetPass = require('./routes/mail_notify_reset_pass')
 
 // User
-const user = require('./routes/user')
+const user = require('./routes/admin/user')
 const AddUser = require("./routes/form_AddUser")
 const delete_user = require("./routes/delete_user")
 const edit_user = require("./routes/edit_user")
