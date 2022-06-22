@@ -1,12 +1,16 @@
 const express = require("express")
 const router = express.Router()
-const Maintenance = require("../models/maintenance")
+const Maintenance = require("../../models/maintenance")
 
 router.get("/maintenance", (req, res) => {
     const showname = req.session.username
-    if (req.session.login && req.session.typeUser === 'Admin') {
+    if (req.session.login && req.session.typeUser == 'Admin') {
         Maintenance.find().exec((err, doc) => {
-            res.render("maintenance", { MTN: doc, order: order = 1, showname: showname })
+            res.render("maintenance", {
+                order: order = 1,
+                showname: showname,
+                MTN: doc
+            })
         })
     }
     else {

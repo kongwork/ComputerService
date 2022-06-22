@@ -1,9 +1,9 @@
 const express = require("express")
 const router = express.Router()
 const nodemailer = require("nodemailer")
-const Maintenance = require("../models/maintenance")
-const Device = require("../models/device")
-const User = require("../models/user")
+const Maintenance = require("../../models/maintenance")
+const Device = require("../../models/device")
+const User = require("../../models/user")
 
 
 router.post("/CheckMaintenance/:id", (req, res) => {
@@ -11,7 +11,6 @@ router.post("/CheckMaintenance/:id", (req, res) => {
     if (req.session.login) {
         Maintenance.findOne({ _id: req.params.id }).exec((err, doc) => {
             res.render("CheckMaintenance", { MTN: doc, showname: showname })
-            console.log(typeof doc.MTN_Img[0],'-------------------------')
         })
     }
     else {
@@ -57,19 +56,32 @@ router.post("/ConfirmMaintenance/:UserID", (req, res) => {
                 }
             });
 
-            let mtn_data = {
-                MTN_Status: '2'
-            }
-            let dv_data = {
-                DeviceStatus: '1'
-            }
-            // อัพเดตข้อมูล Device
-            Maintenance.findByIdAndUpdate( req.body.maintenance_id, mtn_data, { useFindAndModify: false } ).exec(err => {
-                Device.findOneAndUpdate({DeviceCode: docMTN.DeviceID}, dv_data, { useFindAndModify: false } ).exec(err => {
-                    res.redirect("/maintenance")
+            if (docMTN.MTN_Status == '1') {
+                let mtn_data = {
+                    MTN_Status: '2'
+                }
+                let dv_data = {
+                    DeviceStatus: '1'
+                }
+                Maintenance.findByIdAndUpdate( req.body.maintenance_id, mtn_data, { useFindAndModify: false } ).exec(err => {
+                    Device.findOneAndUpdate({DeviceCode: docMTN.DeviceID}, dv_data, { useFindAndModify: false } ).exec(err => {
+                        res.redirect("/maintenance")
+                    })
                 })
-            })
-
+            }
+            else {
+                let mtn_data = {
+                    MTN_Status: '3'
+                }
+                let dv_data = {
+                    DeviceStatus: '0'
+                }
+                Maintenance.findByIdAndUpdate( req.body.maintenance_id, mtn_data, { useFindAndModify: false } ).exec(err => {
+                    Device.findOneAndUpdate({DeviceCode: docMTN.DeviceID}, dv_data, { useFindAndModify: false } ).exec(err => {
+                        res.redirect("/maintenance")
+                    })
+                })
+            }
         })
     })
 })

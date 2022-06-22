@@ -38,3 +38,10 @@ td {
     margin-top: auto;
     margin-bottom: auto;
 }
+.text-navbar-neon {
+    margin-left: 40px;
+    margin-bottom: auto;
+    color: #99ff99;
+    background-color: #031321;
+    text-shadow: 0px 0px 10px #8cf8f1, 0 0 20px #8cf8f1, 0 0 80px #8cf8f1;
+}

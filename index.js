@@ -18,20 +18,21 @@ const edit_user = require("./routes/edit_user")
 const SearchUser = require("./routes/search_user")
 
 // Category
-const Category = require("./routes/category")
+const Category = require("./routes/admin/category")
 const AddCategory = require("./routes/form_AddCategory")
 const delete_category = require("./routes/delete_category")
 const SearchCategory = require("./routes/search_category")
 const edit_category = require("./routes/edit_category")
 // Device
-const Device = require("./routes/device")
+const Device = require("./routes/admin/device")
 const AddDevice = require("./routes/form_AddDevice")
 const delete_device = require("./routes/delete_device")
 const edit_device = require("./routes/edit_device")
 // Maintenance
-const Maintenance = require("./routes/maintenance")
-const CheckMaintenance = require("./routes/CheckMaintenance")
+const Maintenance = require("./routes/admin/maintenance")
+const CheckMaintenance = require("./routes/admin/CheckMaintenance")
 const DeleteMaintenance = require("./routes/delete_maintenance")
+const SearchMaintenance = require("./routes/search_maintenance")
 
 // For user
 // List Inform
@@ -84,6 +85,7 @@ app.use(
     edit_device,
     Maintenance,
     CheckMaintenance,
+    SearchMaintenance,
 
     // For User
     ListInform,
