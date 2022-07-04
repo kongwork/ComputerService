@@ -15,10 +15,10 @@
 </head>
 
 <body>
-    <div style="background-color: rgb(248, 248, 248)">
+    <div style="background-color: #EEEEEE">
         <div class="container">
-            <div class="d-flex" style="height: 100vh">
-                <form class="form-horizontal center-1" method="post" action="/login">
+            <div class="d-flex" style="height: 100vh;">
+                <form class="center-1" method="post" action="/login">
                     <br>
                     <br>
                     <h3 style="text-align: center"><b>Login</b></h3>
@@ -27,24 +27,22 @@
                         <div class="alert alert-danger" role="alert">
                             <%= success %>
                         </div>
-                        <% } %>
-                            <label class="form-label">User Name</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Enter user name" name="username"
-                                    required>
-                            </div>
-                            <label class="form-label">Password</label>
-                            <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="Enter user password"
-                                    name="password" required>
-                            </div>
-                            <br>
-                            <button type="submit" class="btn btn-primary center-2" style="width: 200px;">Login</button>
-                            <br>
-                            <hr style="width: 250px; margin-left: auto; margin-right: auto">
-                            <a href="/forgot_password" style="text-align: center;" name=''>
-                                <p>Forgot your password?</p>
-                            </a>
+                    <% } %>
+                    <label class="form-label">User Name</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Enter user name" name="username" required>
+                    </div>
+                    <label class="form-label">Password</label>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Enter user password" name="password" required>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary center-2" style="width: 200px;">Login</button>
+                    <br>
+                    <hr style="width: 250px; margin-left: auto; margin-right: auto">
+                    <a href="/forgot_password" style="text-align: center;" name=''>
+                        <p>Forgot your password?</p>
+                    </a>
                 </form>
             </div>
         </div>

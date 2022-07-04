@@ -2,12 +2,11 @@ const express = require("express")
 const router = express.Router()
 
 router.get("/", (req, res) => {
-    const passfail = 'Username หรือ Password ผิด'
     if (req.session.login_fail != true) {
         res.render("index.ejs", { success: '' })
     }
     else {
-        res.render("index.ejs", { success: passfail })
+        res.render("index.ejs", { success: 'Username หรือ Password ผิด' })
     }
 })
 

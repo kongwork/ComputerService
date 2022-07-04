@@ -12,14 +12,23 @@ const MailResetPass = require('./routes/mail_notify_reset_pass')
 
 // User
 const user = require('./routes/admin/user')
-const AddUser = require("./routes/form_AddUser")
+const AddUser = require("./routes/admin/form_add_data/user")
 const delete_user = require("./routes/delete_user")
 const edit_user = require("./routes/edit_user")
 const SearchUser = require("./routes/search_user")
 
+// Faculty
+const Faculty = require("./routes/admin/faculty")
+const AddFaculty = require("./routes/admin/form_add_data/faculty")
+const DeleteFaculty = require("./routes/admin/delete_data/faculty")
+
+// Branch
+const Branch = require("./routes/admin/branch")
+const AddBranch = require("./routes/admin/form_add_data/branch")
+
 // Category
 const Category = require("./routes/admin/category")
-const AddCategory = require("./routes/form_AddCategory")
+const AddCategory = require("./routes/admin/form_add_data/category")
 const delete_category = require("./routes/delete_category")
 const SearchCategory = require("./routes/search_category")
 const edit_category = require("./routes/edit_category")
@@ -86,6 +95,11 @@ app.use(
     Maintenance,
     CheckMaintenance,
     SearchMaintenance,
+    Faculty,
+    AddFaculty,
+    DeleteFaculty,
+    AddBranch,
+    Branch,
 
     // For User
     ListInform,

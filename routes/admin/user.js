@@ -7,11 +7,10 @@ router.get("/user", (req, res) => {
     const fname = req.session.fname
     const lname = req.session.lname
     if (req.session.login && req.session.typeUser == 'Admin') {
-        let order = 1
         User.find().exec((err, doc) => {
             res.render("user", {
                 users: doc,
-                order: order,
+                order: 1,
                 showname: showname,
                 fname: fname,
                 lname: lname

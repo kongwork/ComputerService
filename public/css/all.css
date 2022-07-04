@@ -2,6 +2,13 @@ body{
     font-family: 'Prompt', sans-serif;
     background-color: rgb(219, 219, 219)
 }
+i {
+    font-size: 21px;
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
 .center-1 {
     display: block;
     margin: auto;

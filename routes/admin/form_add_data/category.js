@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Category = require("../models/category")
+const Category = require("../../../models/category")
 
 router.get("/form_AddCategory", (req, res) => {
     const showname = req.session.username
