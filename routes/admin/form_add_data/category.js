@@ -2,16 +2,6 @@ const express = require("express")
 const router = express.Router()
 const Category = require("../../../models/category")
 
-router.get("/form_AddCategory", (req, res) => {
-    const showname = req.session.username
-    if (req.session.login) {
-        res.render("form_AddCategory", { showname: showname })
-    }
-    else {
-        res.redirect('/')
-    }
-})
-
 router.post("/insertCategory", (req, res) => {
     const category = req.body.category;
     console.log(category)
@@ -26,7 +16,7 @@ router.post("/insertCategory", (req, res) => {
             })
         }
         else {
-            res.redirect("/form_AddCategory")
+            console.log(err)
         }
     })
 })

@@ -1,14 +1,32 @@
 const express = require("express")
 const router = express.Router()
 const User = require("../models/user")
+const Faculty = require("../models/faculties")
+const Branch = require("../models/branches")
+
 
 
 router.post("/edit", (req, res) => {
     const edit_user = req.body.edit_user
     const showname = req.session.username
     if (req.session.login) {
-        User.findOne({ _id: edit_user }).exec((err, doc) => {
-            res.render("edit_user", { user: doc, showname: showname })
+        User.findOne({ _id: edit_user }).exec((err, user) => {
+            Faculty.findOne({ _id: user.FacultyID }).exec((err, find_faculty) => {
+                Branch.findOne({ _id: user.BranchID }).exec((err, find_branch) => {
+                    Faculty.find().exec((err, faculty) => {
+                        Branch.find().exec((err, branch) => {
+                            res.render("edit_user", {
+                                faculty: faculty,
+                                branch: branch,
+                                find_faculty: find_faculty,
+                                find_branch: find_branch,
+                                user: user,
+                                showname: showname
+                            })
+                        })
+                    })
+                })
+            })
         })
     }
     else {

@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/bst5/css/bootstrap.min.css">
+    <script src="/bst5/js/bootstrap.min.js"></script>
+    <script src="/bst5/js/bootstrap.bundle.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/all.css">
     <title>Document</title>
@@ -26,118 +26,190 @@
 <body>
     <%- include('navbar') %>
         <div class="d-flex">
-            <nav class="nav flex-column" style="background-color: white; width: 350px; height: 878px; padding: 25px 30px 0 30px;">
+            <nav class="nav flex-column full-height-nav">
                 <p style="font-size: 20px; text-align: center;">
                     <b>Menu</b>
                 </p>
                 <a class="nav-link" href="/user" style="color: #333333;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-people" viewBox="0 2 16 16">
-                        <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
-                    </svg>
+                    <i class="bi bi-people"></i>
                     User
                 </a>
+                <a class="nav-link" href="/faculty" style="color: #333333;">
+                    <i class="bi bi-journal-bookmark"></i>
+                    Faculty or Branch
+                </a>
                 <a class="nav-link" href="/category" style="color: #333333;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
-                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                    </svg>
+                    <i class="bi bi-bookmarks"></i>
                     Category
                 </a>
                 <a class="nav-link" href="/device" style="color: #333333;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cpu" viewBox="0 0 16 16">
-                        <path d="M5 0a.5.5 0 0 1 .5.5V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2h1V.5a.5.5 0 0 1 1 0V2A2.5 2.5 0 0 1 14 4.5h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14v1h1.5a.5.5 0 0 1 0 1H14a2.5 2.5 0 0 1-2.5 2.5v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14h-1v1.5a.5.5 0 0 1-1 0V14A2.5 2.5 0 0 1 2 11.5H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2v-1H.5a.5.5 0 0 1 0-1H2A2.5 2.5 0 0 1 4.5 2V.5A.5.5 0 0 1 5 0zm-.5 3A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 11.5 3h-7zM5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3zM6.5 6a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
-                    </svg>
+                    <i class="bi bi-cpu"></i>
                     Device
                 </a>
-                <a class="nav-link" href="/maintenance" style="color: #1a75ff;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
-                        <path d="M16 4.5a4.492 4.492 0 0 1-1.703 3.526L13 5l2.959-1.11c.027.2.041.403.041.61Z"/>
-                        <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.49 4.49 0 0 0 11.5 9Zm-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376ZM3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
-                    </svg>
-                    <b>Maintenance</b>
+                <a class="nav-link" href="/maintenance" style="color: #1a75ff; text-shadow: 0px 0px 5px #1a75ff">
+                    <i class="bi bi-wrench-adjustable"></i>
+                    Maintenance
                 </a>
             </nav>
-            <div style="width: 100%; height: 878px; background-color: rgb(245, 245, 245); margin-left: 2px; padding: 50px; overflow: auto;">
-                <div class="row">
-                    <div class="col">
-                        <h2 style="float: left;">Maintenance Detail</h2>
-                    </div>
-                    <div class="col">
-                        <% if (MTN.MTN_Status == '1' ) { %>
-                            <button class="btn btn-outline-warning" style="float: right;" form="check-device">ตรวจเช็คอุปกรณ์</button>
-                        <% } else if (MTN.MTN_Status == '2' ) { %>
-                            <button class="btn btn-outline-info" style="float: right;" form="check-device">ซ่อมแซมสำเร็จ</button>
-                        <% } else { %>
+            <div class="full-height">
+                <div>
+                    <% if (MTN.MTN_Status == '1' ) { %>
+                        <button class="btn btn-outline-warning" style="float: right;" form="check-device">ตรวจเช็คอุปกรณ์</button>
+                    <% } else if (MTN.MTN_Status == '2' ) { %>
+                        <button class="btn btn-outline-info" style="float: right;" form="check-device">ซ่อมแซมสำเร็จ</button>
+                    <% } else { %>
 
-                        <% } %>
-                    </div>
+                    <% } %>
                 </div>
+                <br>
+                <div style="margin:0px auto;max-width:1036px">
+                    <br>
+                    <h3>รายละเอียดการแจ้งซ่อมอุปกรณ์</h3>
+                    <br>
+                    <br>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="font-weight:bold;text-transform:capitalize;font-size:0px;padding:20px;word-break:break-word;color:#59595b" >
+                                    <div style="display:inline-block;font-size:18px;line-height:22px;color:#59595b">
+                                        ชื่ออุปกรณ์ : <%= MTN.DeviceName %>
+                                    </div>
+                                    <span style="float:right;text-align:right;font-size:18px;line-height:22px;color:#59595b" >
+                                        หมายเลขอุปกรณ์ : <%= MTN.DeviceID %>
+                                    </span> 
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-bottom-style: hidden;">
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col">
+                                            <br>
+                                            <p>
+                                                <b>
+                                                    รายละเอียดผู้แจ้ง
+                                                </b>
+                                            </p>
+                                            <p style="padding: 0 33px;">
+                                                ผู้แจ้ง : <%= user_detail.Prefix %> <%= user_detail.FirstName %> <%= user_detail.LastName %>
+                                            </p>
+                                            <p style="padding: 0 33px;">
+                                                คณะ : <%= user_detail_faculty.Faculty %>
+                                            </p>
+                                            <p style="padding: 0 33px;">
+                                                สาขา : <%= user_detail_branch.Branch %>
+                                            </p>
+                                            <p style="padding: 0 33px;">
+                                                Email : <%= user_detail.Email %>
+                                            </p>
+                                            <p style="padding: 0 33px;">
+                                                โทรศัพท์มือถือ : <%= user_detail.PhoneNumber %>
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            <br>
+                                            <p>
+                                                <b>
+                                                    รายละเอียดอุปกรณ์
+                                                </b>
+                                                <p style="padding: 0 33px;">
+                                                    หมายเลขอุปกรณ์ : <%= MTN.DeviceID %>
+                                                </p>
+                                                <p style="padding: 0 33px;">
+                                                    ชื่ออุปกรณ์ : <%= MTN.DeviceName %>
+                                                </p>
+                                                <p style="padding: 0 33px;">
+                                                    ห้อง : <%= device.Room %>
+                                                </p>
+                                                <p style="padding: 0 33px;">
+                                                    คณะ : <%= faculty.Faculty %>
+                                                </p>
+                                                <p style="padding: 0 33px;">
+                                                    สาขา : <%= branch.Branch %>
+                                                </p>
+                                            </p>
+                                            <!-- <div class="row">
+                                                <div class="col col-md-auto">
+                                                    <p style="padding: 0 33px;">
+                                                        หมายเลขอุปกรณ์ : <%= MTN.DeviceID %>
+                                                    </p>
+                                                    <p style="padding: 0 33px;">
+                                                        ชื่ออุปกรณ์ : <%= MTN.DeviceName %>
+                                                    </p>
+                                                </div>
+                                                <div class="col col-md-auto">
+                                                    <p style="padding: 0 33px;">
+                                                        คณะ : <%= faculty.Faculty %>
+                                                    </p>
+                                                    <p style="padding: 0 33px;">
+                                                        สาขา : <%= branch.Branch %>
+                                                    </p>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    รายละเอียดอาการเสีย
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-style: hidden;">
+                                    <br>
+                                    <p style="padding: 0 33px; word-break:break-all;">
+                                        <%= MTN.MTN_Detail %>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="border-style: hidden;">
+                                    รายละเอียดรูปภาพ
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-style: hidden;">
+                                    <% if (MTN.MTN_Img[0]==undefined) { %>
+                                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                                                <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+                                                <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
+                                            </svg>
+                                            <div style="margin-left: 10px;">
+                                                <strong>Warning!</strong> ไม่มีรูปภาพ
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <% if (MTN.MTN_Img[0] != undefined) { %>
+                    <br>
+                    <% for (var i=0; i < MTN.MTN_Img.length; i++) { %>
+                        <img class="mb-3 center" src="/uploadsIMG/<%= MTN.MTN_Img[i] %>" alt="" height="auto">
+                    <% } %>
+                <% } %>
                 <form id="check-device" action="/ConfirmMaintenance/<%= MTN.UserID %>" method="post" style="padding: 20px 100px 0 100px;">
                     <input type="text" name="maintenance_id" value="<%= MTN._id %>" hidden>
                     <input type="text" name="user_id" value="<%= MTN.UserID %>" hidden>
-                    <div class="row">
-                        <div class="col">
-                            <div class="col mb-3">
-                                <label class="form-label">ชื่อ-นามสกุล (ผู้แจ้ง)</label>
-                                <input type="text" class="form-control" name="" value="<%= MTN.UserFirstName %> <%= MTN.UserLastName %>">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="col mb-3">
-                                <label class="form-label">มือถือ</label>
-                                <input type="text" class="form-control" name="" value="<%= MTN.PhoneNumber %>">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-3">
-                            <label class="form-label">หมายเลขอุปกรณ์</label>
-                            <input type="text" class="form-control" name="" value="<%= MTN.DeviceID %>">
-                        </div>
-                        <div class="col mb-3">
-                            <label class="form-label">ชื่ออุปกรณ์</label>
-                            <input type="text" class="form-control" name="room" value="<%= MTN.DeviceName %>">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="row">
-                                <div class="col mb-3">
-                                    <label class="form-label">วันที่แจ้ง</label>
-                                    <input class="form-control" type="date" name=""
-                                        value="<%= JSON.stringify(MTN.MTN_Date).substring(1, 11); %>">
-                                </div>
-                                <div class="col mb-3">
-                                    <label class="form-label">สถานะ</label>
-                                    <input type="text" class="form-control" name="" value="<%= MTN.MTN_Status %>">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                    
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" name="detail" rows="5" ><%= MTN.MTN_Detail %></textarea>
-                        </div>
-                    </div>
-                    <% if (MTN.MTN_Img[0] == undefined) { %>
-                        <div class="alert alert-danger d-flex align-items-center" role="alert">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
-                                <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
-                                <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
-                            </svg>
-                            <div style="margin-left: 10px;">
-                                <strong>Warning!</strong> ไม่มีรูปภาพ
-                            </div>
-                        </div>
-                    <% } else { %>
-                        <br>
-                        <% for (var i=0; i < MTN.MTN_Img.length; i++) { %>
-                            <img class="mb-3 center" src="/uploadsIMG/<%= MTN.MTN_Img[i] %>" alt="" height="auto">
-                        <% } %>
-                    <% } %>
                 </form>
             </div>
         </div>

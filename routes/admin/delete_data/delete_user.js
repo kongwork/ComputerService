@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const User = require('../models/user')
+const User = require('../../../models/user')
 
 router.get("/delete_user/:id", (req, res) => {
     User.findByIdAndDelete(req.params.id, { useFindAndModify: false }).exec(err => {

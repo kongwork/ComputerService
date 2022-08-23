@@ -7,7 +7,11 @@ router.get("/device", (req, res) => {
     if (req.session.login && req.session.typeUser == 'Admin') {
         let order = 1
         Device.find().exec((err, doc) => {
-            res.render("device", { devices: doc, order: order, showname: showname })
+            res.render("device", { 
+                devices: doc,
+                order: order,
+                showname: showname
+            })
         })
         //แสดงผลหน้า Template <%= JSON.stringify(item.details,[ 'details', 'CategoryName']).slice(18,-3); %>
         /*let MongoClient = require('mongodb').MongoClient;

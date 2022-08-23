@@ -26,13 +26,14 @@
 <body>
     <%- include('navbar') %>
         <div class="d-flex">
-            <nav class="nav flex-column" style="background-color: white; width: 350px; height: 878px; padding: 25px 30px 0 30px;">
+            <nav class="nav flex-column full-height-nav">
                 <p style="font-size: 20px; text-align: center;"><b>Menu</b></p>
                 <a class="nav-link" href="/list_inform" style="color: #333333;">รายการแจ้งซ้อมของฉัน</a>
                 <a class="nav-link" href="/user_category" style="color: #333333;">หมวดหมู่</a>
                 <a class="nav-link" href="/user_device" style="color: #1a75ff;"><b>อุปกรณ์</b></a>
             </nav>
-            <div style="width: 100%; height: 878px; background-color: rgb(245, 245, 245); margin-left: 2px; padding: 50px; overflow: auto;">
+            <div class="full-height">
+                <br>
                 <h2>รายละเอียดอุปกรณ์</h2>
                 <br>
                 <form style="padding: 20px 100px 0 100px;">
@@ -147,14 +148,14 @@
 </body>
  
 <script>
-    const handleOnclickButton = (e) => {
+    // const handleOnclickButton = (e) => {
         
-        var nameValue = document.getElementById("img").files;
-        if (nameValue.length >= 4) {
-            alert('dfnjkfhdjfh')
-        }
-        console.log(nameValue)
-    }
+    //     var nameValue = document.getElementById("img").files;
+    //     if (nameValue.length >= 4) {
+    //         alert('dfnjkfhdjfh')
+    //     }
+    //     console.log(nameValue)
+    // }
 </script>
 
 </html>

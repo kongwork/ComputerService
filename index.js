@@ -10,38 +10,45 @@ const logout = require('./routes/logout')
 const ForgotPass = require('./routes/forgot_password')
 const MailResetPass = require('./routes/mail_notify_reset_pass')
 
-// User
-const user = require('./routes/admin/user')
-const AddUser = require("./routes/admin/form_add_data/user")
-const delete_user = require("./routes/delete_user")
+const page_admin_user = require('./routes/admin/user')
+const page_admin_faculty = require("./routes/admin/faculty")
+const page_admin_branch = require("./routes/admin/branch")
+const page_admin_category = require("./routes/admin/category")
+const page_admin_device = require("./routes/admin/device")
+const page_admin_maintenance = require("./routes/admin/maintenance")
+
+const add_user = require("./routes/admin/form_add_data/user")
+const add_faculty = require("./routes/admin/form_add_data/faculty")
+const add_branch = require("./routes/admin/form_add_data/branch")
+const add_category = require("./routes/admin/form_add_data/category")
+const add_device = require("./routes/form_AddDevice")
+
 const edit_user = require("./routes/edit_user")
-const SearchUser = require("./routes/search_user")
-
-// Faculty
-const Faculty = require("./routes/admin/faculty")
-const AddFaculty = require("./routes/admin/form_add_data/faculty")
-const DeleteFaculty = require("./routes/admin/delete_data/faculty")
-
-// Branch
-const Branch = require("./routes/admin/branch")
-const AddBranch = require("./routes/admin/form_add_data/branch")
-
-// Category
-const Category = require("./routes/admin/category")
-const AddCategory = require("./routes/admin/form_add_data/category")
-const delete_category = require("./routes/delete_category")
-const SearchCategory = require("./routes/search_category")
+const edit_faculty = require("./routes/admin/edit_data/faculty")
+const edit_branch = require("./routes/admin/edit_data/branch")
 const edit_category = require("./routes/edit_category")
-// Device
-const Device = require("./routes/admin/device")
-const AddDevice = require("./routes/form_AddDevice")
-const delete_device = require("./routes/delete_device")
 const edit_device = require("./routes/edit_device")
-// Maintenance
-const Maintenance = require("./routes/admin/maintenance")
+
+const delete_user = require("./routes/admin/delete_data/delete_user")
+const delete_faculty = require("./routes/admin/delete_data/faculty")
+const delete_branch = require("./routes/admin/delete_data/branch")
+const delete_category = require("./routes/admin/delete_data/delete_category")
+const delete_device = require("./routes/admin/delete_data/delete_device")
+const delete_maintenance = require("./routes/admin/delete_data/delete_maintenance")
+
+const search_user = require("./routes/admin/search_data/search_user")
+const search_category = require("./routes/admin/search_data/search_category")
+const search_device = require("./routes/admin/search_data/search_device")
+const search_maintenance = require("./routes/admin/search_data/search_maintenance")
+const search_faculty = require("./routes/admin/search_data/search_faculty")
+const search_branch = require("./routes/admin/search_data/search_branch")
+const search_list_inform = require("./routes/admin/search_data/search_list_inform")
+const search_category_page_user = require("./routes/admin/search_data/search_category_page_user")
+const search_device_page_user = require("./routes/admin/search_data/search_device_page_user")
+
 const CheckMaintenance = require("./routes/admin/CheckMaintenance")
-const DeleteMaintenance = require("./routes/delete_maintenance")
-const SearchMaintenance = require("./routes/search_maintenance")
+
+
 
 // For user
 // List Inform
@@ -54,7 +61,7 @@ const User_Category = require("./routes/user_category")
 const Inform = require("./routes/inform")
 const DetailInform = require("./routes/inform_detail")
 //const re = require("./routes/re")
-const report = require("./report/report.js")
+const report = require("./test01/report.js")
 
 const app = express()
 
@@ -78,28 +85,45 @@ app.use(
     MailResetPass,
 
     // For Admin 
-    user,
-    AddUser,
-    delete_user,
-    edit_user,
-    SearchUser,
-    Category,
-    AddCategory,
-    delete_category,
-    SearchCategory,
-    edit_category,
-    Device,
-    AddDevice,
-    delete_device,
+    
+    
+    page_admin_user,
+    page_admin_faculty,
+    page_admin_branch,
+    page_admin_category,
+    page_admin_device,
+    page_admin_maintenance,
+    // เพิ่มข้อมูล
+    add_user,
+    add_faculty,
+    add_branch,
+    add_device,
+    add_category,
+    // แก้ไขข้อมูล
+    edit_faculty,
+    edit_branch,
     edit_device,
-    Maintenance,
+    edit_category,
+    edit_user,
+    // ลบข้อมูล
+    delete_user,
+    delete_category,
+    delete_branch,
+    delete_faculty,
+    delete_device,
+    delete_maintenance,
+    // ค้นหาข้อมูล
+    search_user,
+    search_category,
+    search_maintenance,
+    search_device,
+    search_faculty,
+    search_branch,
+    search_list_inform,
+    search_category_page_user,
+    search_device_page_user,
+
     CheckMaintenance,
-    SearchMaintenance,
-    Faculty,
-    AddFaculty,
-    DeleteFaculty,
-    AddBranch,
-    Branch,
 
     // For User
     ListInform,
@@ -108,7 +132,7 @@ app.use(
     Inform,
     //re,
     report,
-    DeleteMaintenance,
+    
     DetailInform
 )
 app.use(express.static(path.join(__dirname, 'public')))

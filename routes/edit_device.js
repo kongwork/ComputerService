@@ -2,25 +2,40 @@ const express = require("express")
 const router = express.Router()
 const Device = require("../models/device")
 const Category = require("../models/category")
-
+const Faculty = require("../models/faculties")
+const Branch = require("../models/branches")
 
 router.post("/editDevice", (req, res) => {
     const edit_device = req.body.edit_device
     const showname = req.session.username
     if (req.session.login) {
-        Device.findOne({ _id: edit_device }).exec((err, doc_d) => {
-            Category.find().exec((err, doc_c) => {
-                Category.findOne({ _id: doc_d.CategoryID }).exec((err, cate) => {
-                    res.render("edit_device", { 
-                        cate: cate,
-                        /*lookup: doc_lookup,*/
-                        devices: doc_d,
-                        categorys: doc_c,
-                        showname: showname
+        Branch.find().exec((err, branch) => {
+            Faculty.find().exec((err, faculty) => {
+                Device.findOne({ _id: edit_device }).exec((err, device) => {
+                    Faculty.findOne({ _id: device.FacultyID }).exec((err, find_faculty) => {
+                        Branch.findOne({ _id: device.BranchID }).exec((err, find_branch) => {
+                            Category.find().exec((err, doc_c) => {
+                                Category.findOne({ _id: device.CategoryID }).exec((err, cate) => {
+                                    res.render("edit_device", {
+                                        find_faculty: find_faculty,
+                                        find_branch: find_branch,
+                                        branch: branch,
+                                        faculty: faculty,
+                                        cate: cate,
+                                        devices: device,
+                                        categorys: doc_c,
+                                        showname: showname
+                                    })
+                                    console.log(find_faculty)
+                                    console.log(find_branch)
+                                })
+                            })
+                        })
                     })
                 })
             })
         })
+        
     }
     else {
         res.redirect('/')
@@ -32,6 +47,8 @@ router.post("/updateDevice", (req, res) => {
     // ข้อมูลใหม่ที่ส่งมาจาก form edit
     Category.findOne({ _id: req.body.category_id }).exec((err, doc_c) => {
         let data = {
+            FacultyID: req.body.faculty_id,
+            BranchID: req.body.branch_id,
             CategoryID: req.body.category_id,
             DeviceName: req.body.device_name,
             CategoryName: doc_c.CategoryName,
@@ -47,6 +64,7 @@ router.post("/updateDevice", (req, res) => {
             res.redirect("/device")
         })
     })
+    
 })
 
 module.exports = router;

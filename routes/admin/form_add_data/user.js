@@ -1,15 +1,31 @@
 const express = require("express")
 const router = express.Router()
 const User = require("../../../models/user")
+const Faculty = require("../../../models/faculties")
+const Branch = require("../../../models/branches")
 
 router.get("/form_AddUser", (req, res) => {
     const showname = req.session.username
-    if (req.session.login) {
-        res.render("form_AddUser.ejs", { showname: showname })
-    }
-    else {
-        res.redirect('/')
-    }
+    Faculty.find().exec((err, faculty) => {
+        Branch.find().exec((err, branch) => {
+            if (req.session.login) {
+                res.render("form_AddUser.ejs",{ 
+                    faculty: faculty,
+                    branch: branch,
+                    showname: showname
+                })
+            }
+            else {
+                res.redirect('/')
+            }
+        })
+    })
+    // if (req.session.login) {
+    //     res.render("form_AddUser.ejs", { showname: showname })
+    // }
+    // else {
+    //     res.redirect('/')
+    // }
 })
 
 router.post("/insert", (req, res) => {
@@ -17,6 +33,8 @@ router.post("/insert", (req, res) => {
     User.findOne({ UserName: username }).exec((err, doc) => {
         if (!doc) {
             let data = new User({
+                FacultyID: req.body.faculty_id,
+                BranchID: req.body.branch_id,
                 Prefix: req.body.Prefix,
                 FirstName: req.body.FirstName,
                 LastName: req.body.LastName,

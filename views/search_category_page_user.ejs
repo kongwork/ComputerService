@@ -25,11 +25,11 @@
                     <i class="bi bi-card-list"></i>
                     รายการแจ้งซ่อม
                 </a>
-                <a class="nav-link" href="/user_category" style="color: #333333;">
+                <a class="nav-link" href="/user_category" style="color: #1a75ff; text-shadow: 0px 0px 5px #1a75ff">
                     <i class="bi bi-bookmarks"></i>
                     Category
                 </a>
-                <a class="nav-link" href="/user_device" style="color: #1a75ff; text-shadow: 0px 0px 5px #1a75ff">
+                <a class="nav-link" href="/user_device" style="color: #333333;">
                     <i class="bi bi-cpu"></i>
                     Device
                 </a>
@@ -38,12 +38,12 @@
                 <br>
                 <div class="row">
                     <div class="col">
-                        <h1>อุปกรณ์</h1>
+                        <h1>หมวดหมู่อุปกรณ์</h1>
                     </div>
                     <div class="col-5">
                         <div style="float:right;">
-                            <form class="d-flex" action="search-device-page-user" method="post">
-                                <input class="form-control me-2" type="search" name="search" placeholder="Search Device Name" aria-label="Search" size="30">
+                            <form class="d-flex" action="/search-category-page-user" method="post">
+                                <input class="form-control me-2" type="search" name="search" placeholder="Search Category Name" aria-label="Search" size="30">
                                 <button class="btn" style="background-color: #1a75ff; color: white;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -58,44 +58,24 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>รหัสอุปกรณ์</th>
-                            <th>ชื่ออุปกรณ์</th>
                             <th>หมวดหมู่</th>
-                            <th style="text-align: center;">สถานะอุปกรณ์</th>
-                            <th></th>
-                            <th></th>
+                            <th>จำนวนอุปกรณ์</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% Object.values(devices).forEach(function(item,i){%>
+                        <% Object.values(categorys).forEach(function(item,i){%>
                         <tr>
                             <td vertical-align: bottom;><%= order++ %></td>
-                            <td><%= item.DeviceCode %></td>
-                            <td><%= item.DeviceName %></td>
-                            <td><%= JSON.stringify(item.details,[ 'details', 'CategoryName']).slice(18,-3); %></td>
-                            <td style="text-align: center;">
-                                <% if (item.DeviceStatus == '0' ) { %>
-                                    <span class="badge rounded-pill bg-success">
-                                        ใช้งานปกติ
-                                    </span>
-                                <% } else { %>
-                                    <span class="badge rounded-pill bg-danger">
-                                        กำลังซ่อมแซม
-                                    </span>
-                                <% } %>
-                            </td>
+                            <td><%= item.CategoryName %></td>
                             <td>
-                                <form class="d-flex" action="/inform/<%= item._id %>" method="post">
-                                    <% if (item.DeviceStatus == '0' ) { %>
-                                        <button class="btn btn-warning btn-sm" type="submit">
-                                            แจ้งซ่อม
-                                        </button>
-                                    <% } else { %>
-                                        <button class="btn btn-warning btn-sm" type="submit" disabled>
-                                            แจ้งซ่อม
-                                        </button>
+                                <% let id = item._id %>
+                                <% let num = 0 %>
+                                <% for(var i=0; i < devices.length; i++) {%>
+                                    <% if (devices[i].CategoryID.toString() == id.toString()) { %>
+                                        <% num++ %>
                                     <% } %>
-                                </form>
+                                <% } %>
+                                <%= num %>
                             </td>
                         </tr>
                         <% }) %>

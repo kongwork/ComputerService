@@ -10,6 +10,8 @@ mongoose.connect(dbUrl, {
 
 // design Schema
 let userSchema = mongoose.Schema({
+    FacultyID: { type: mongoose.Schema.Types.ObjectId, ref: 'faculties' },
+    BranchID: { type: mongoose.Schema.Types.ObjectId, ref: 'branches' },
     Prefix: String,
     FirstName: String,
     LastName: String,

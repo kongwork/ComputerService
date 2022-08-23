@@ -15,13 +15,28 @@ const storage_img = multer.diskStorage({
     },
 });
 
-const upload_img = multer({ storage: storage_img }).array("fileimg",3);
+const upload_img = multer({ storage: storage_img }).array("fileimg");
 
 
 router.post("/inform/:id", (req, res) => {
     const showname = req.session.username
     if (req.session.login) {
         Device.findOne({ _id: req.params.id }).exec((err, doc_d) => {
+            Maintenance.findOne({ DeviceID: doc_d.DeviceCode, MTN_Status: {$in: ['1', '2']} }).exec((err, doc_m) => {
+                Category.find().exec((err, doc_c) => {
+                    Category.findOne({ _id: doc_d.CategoryID }).exec((err, cate) => {
+                        res.render("inform", {
+                            cate: cate,
+                            devices: doc_d,
+                            categorys: doc_c,
+                            checkmtn: doc_m,
+                            showname: showname
+                        })
+                    })
+                })
+            })
+        })
+        /*Device.findOne({ _id: req.params.id }).exec((err, doc_d) => {
             Maintenance.findOne({ DeviceID: doc_d.DeviceCode }).exec((err, doc_m) => {
                 Category.find().exec((err, doc_c) => {
                     Category.findOne({ _id: doc_d.CategoryID }).exec((err, cate) => {
@@ -36,7 +51,7 @@ router.post("/inform/:id", (req, res) => {
                     })
                 })
             })
-        })
+        })*/
     }
     else {
         res.redirect('/')

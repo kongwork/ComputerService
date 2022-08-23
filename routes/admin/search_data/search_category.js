@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Category = require('../models/category')
+const Category = require('../../../models/category')
 
 router.post("/searchCategory", (req, res) => {
     const showname = req.session.username

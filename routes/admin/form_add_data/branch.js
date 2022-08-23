@@ -6,13 +6,13 @@ router.post("/InsertBranch", (req, res) => {
     Branch.findOne({ Branch: req.body.Branch }).exec((err, doc) => {
         if (!doc) {
             let data = new Branch({
-                FacultyID: req.body.FacultyID,
+                FacultyID: req.body.faculty_id,
                 Branch: req.body.branch
             })
             Branch.saveBranch(data, (err) => {
                 if (err) console.log(err)
             })
-            res.redirect('faculty')
+            res.redirect(`/branch/${req.body.faculty_id}`)
         }
     })
 })

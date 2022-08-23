@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Maintenance = require('../models/maintenance')
+const Maintenance = require('../../../models/maintenance')
 
 router.get("/delete_maintenance/:id", (req, res) => {
     Maintenance.findByIdAndDelete(req.params.id, { useFindAndModify: false }).exec(err => {

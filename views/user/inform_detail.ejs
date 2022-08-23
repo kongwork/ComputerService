@@ -26,90 +26,96 @@
 <body>
     <%- include('navbar') %>
         <div class="d-flex">
-            <nav class="nav flex-column" style="background-color: white; width: 350px; height: 878px; padding: 25px 30px 0 30px;">
+            <nav class="nav flex-column full-height-nav">
                 <p style="font-size: 20px; text-align: center;"><b>Menu</b></p>
                 <a class="nav-link" href="/list_inform" style="color: #1a75ff;"><b>รายการแจ้งซ้อมของฉัน</b></a>
                 <a class="nav-link" href="/user_category" style="color: #333333;">หมวดหมู่</a>
                 <a class="nav-link" href="/user_device" style="color: #333333;">อุปกรณ์</a>
             </nav>
-            <div style="width: 100%; height: 878px; background-color: rgb(245, 245, 245); margin-left: 2px; padding: 50px; overflow: auto;">
-                <h2>รายละเอียดอุปกรณ์</h2>
+            <div class="full-height">
+                <div style="margin:0px auto;max-width:1036px">
+                    <br>
+                    <h3>รายละเอียดการแจ้งซ่อมอุปกรณ์</h3>
+                    <br>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="font-weight:bold;text-transform:capitalize;font-size:0px;padding:20px;word-break:break-word;color:#59595b" >
+                                    <div style="display:inline-block;font-size:18px;line-height:22px;color:#59595b">
+                                        ชื่ออุปกรณ์ : <%= mtn.DeviceName %>
+                                    </div>
+                                    <span style="float:right;text-align:right;font-size:18px;line-height:22px;color:#59595b" >
+                                        หมายเลขอุปกรณ์ : <%= mtn.DeviceID %>
+                                    </span> 
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-bottom-style: hidden;">
+                                    <br>
+                                    <p style="padding: 0 33px;">
+                                        ผู้แจ้ง : <%= user.FirstName %> <%= user.LastName %>
+                                    </p>
+                                    <p style="padding: 0 33px;">
+                                        วันที่แจ้งซ่อม : <%= mtn.MTN_Date.toLocaleString() %>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    รายละเอียดอาการเสีย
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-style: hidden;">
+                                    <br>
+                                    <p style="padding: 0 33px; word-break:break-all;">
+                                        <%= mtn.MTN_Detail %>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="border-style: hidden;">
+                                    รายละเอียดรูปภาพ
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border-style: hidden;">
+                                    <% if (mtn.MTN_Img[0]==undefined) { %>
+                                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                                                <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+                                                <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
+                                            </svg>
+                                            <div style="margin-left: 10px;">
+                                                <strong>Warning!</strong> ไม่มีรูปภาพ
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <br>
-                <form style="padding: 20px 100px 0 100px;">
-                    <div class="row">
-                        <div class="col">
-                            <div class="col mb-3">
-                                <label class="form-label">ชื่ออุปกรณ์</label>
-                                <input type="text" class="form-control" value="<%= mtn.DeviceName %><%= typeof mtn.MTN_Img[0] %>" readonly>
-                            </div>
-                            <div class="col mb-3">
-                                <label class="form-label">หมายเลขอุปกรณ์</label>
-                                <input type="text" class="form-control" name="device_code" value="<%= mtn.DeviceCode %>" readonly>
-                            </div>
-                            <div class="col mb-3">
-                                <label class="form-label">ราคา</label>
-                                <input type="text" class="form-control" name="price" value="" readonly>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="col mb-3">
-                                <label class="form-label">หมวดหมู่</label>
-                                <input type="text" class="form-control" name="" value="<%= mtn.CategoryName %>" readonly>
-                            </div>
-                            <div class="col mb-3">
-                                <label class="form-label">หมายเลขห้อง</label>
-                                <input type="text" class="form-control" name="room" value="<%= mtn.Room %>" readonly>
-                            </div>
-                            <div class="row">
-                                <div class="col mb-3">
-                                    <label class="form-label">วันที่ซื้อ</label>
-                                    <input class="form-control" type="date" name="date" value="" readonly>
-                                </div>
-                                <div class="col mb-3">
-                                    <label class="form-label">สถานะอุปกรณ์</label>
-                                    <input type="text" class="form-control" name="" value="<%= mtn.DeviceStatus %>" readonly>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <br>
-                <hr>
-                <br>
-                <h4>
-                    อาการเสีย
-                </h4>
-                <form action="/updateInform" method="post" enctype="multipart/form-data" style="padding: 20px 100px 0 100px;">
-                    <div>
-                        <br>
-                        <% if (mtn == null) { %>
-                            <div class="mb-3">
-                                <label class="form-label">รูปภาพ (ถ้ามี)</label>
-                                <input id="img" class="form-control" type="file" name="fileimg" multiple>
-                            </div>
-                        <% } %>
-                        <div class="mb-3">
-                            <label class="form-label">รายละเอียดอาการเสีย</label>
-                            <textarea class="form-control" rows="4" name="MTN_Detail">คอมกาก</textarea>
-                        </div>
-                        <% if (mtn.MTN_Img[0] == undefined) { %>
-                            <div class="alert alert-danger d-flex align-items-center" role="alert">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
-                                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
-                                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
-                                </svg>
-                                <div style="margin-left: 10px;">
-                                    <strong>Warning!</strong> ไม่มีรูปภาพ
-                                </div>
-                            </div>
-                        <% } else { %>
-                            <br>
-                            <% for (var i=0; i < mtn.MTN_Img.length; i++) { %>
-                                <img class="mb-3 center" src="/uploadsIMG/<%= mtn.MTN_Img[i] %>" alt="" height="auto">
-                            <% } %>
-                        <% } %>
-                    </div>
-                </form>
+                <% if (mtn.MTN_Img[0] != undefined) { %>
+                    <% for (var i=0; i < mtn.MTN_Img.length; i++) { %>
+                        <img class="mb-3 center" src="/uploadsIMG/<%= mtn.MTN_Img[i] %>" height="auto">
+                    <% } %>
+                <% } %>
             </div>
         </div>
 </body>

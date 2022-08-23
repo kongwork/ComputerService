@@ -10,6 +10,8 @@ router.get("/faculty", (req, res) => {
         Faculty.find().exec((err, faculty) => {
             Branch.find().exec((err, branch) => {
                 res.render("faculty", {
+                    show_modal: false,
+                    error: '',
                     faculty: faculty,
                     branch: branch,
                     order: order,

@@ -7,12 +7,11 @@ const Maintenance = require("../models/maintenance")
 
 router.get("/list_inform", (req, res) => {
     const showname = req.session.username
-    let order = 1
     if (req.session.login && req.session.typeUser === 'User') {
         Maintenance.find({ UserID: req.session.userid }).exec((err, doc) => {
             res.render('list_inform', {
                 MTN: doc,
-                order: order,
+                order: 1,
                 showname: showname
             })
         })

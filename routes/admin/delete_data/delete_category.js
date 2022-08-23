@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Category = require('../models/category')
+const Category = require('../../../models/category')
 
 router.get("/delete_category/:id", (req, res) => {
     Category.findByIdAndDelete(req.params.id, { useFindAndModify: false }).exec(err => {

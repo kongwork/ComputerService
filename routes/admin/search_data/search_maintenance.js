@@ -1,6 +1,21 @@
 const express = require("express")
 const router = express.Router()
-const Mantenance = require('../models/maintenance')
+const Mantenance = require('../../../models/maintenance')
+
+router.post("/search-mtn", (req, res) => {
+    const showname = req.session.username
+    let query = { DeviceID: { $regex: '^' + req.body.search, $options: 'i' } }
+    Mantenance.find().exec((err, count) => {
+        Mantenance.find(query).exec((err, doc) => {
+            res.render("search_maintenance", {
+                count: count,
+                MTN: doc,
+                order: 1,
+                showname: showname
+            })
+        })
+    })
+})
 
 router.get("/search-mtn-0", (req, res) => {
     const showname = req.session.username

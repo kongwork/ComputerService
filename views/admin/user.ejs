@@ -17,12 +17,12 @@
 <body>
     <%- include('navbar') %>
         <div class="d-flex">
-            <nav class="nav flex-column" style="background-color: white; width: 350px; height: 881px; padding: 25px 30px 0 30px;">
+            <nav class="nav flex-column full-height-nav">
                 <p style="font-size: 20px; text-align: center;">
                     <b>Menu</b>
                 </p>
                 <a class="nav-link" href="/user" style="color: #1a75ff; text-shadow: 0px 0px 5px #1a75ff">
-                    <i class="bi bi-people"></i>
+                    <i class="bi bi-people" style="margin-top: 10px;"></i>
                     User
                 </a>
                 <a class="nav-link" href="/faculty" style="color: #333333;">
@@ -42,10 +42,13 @@
                     Maintenance
                 </a>
             </nav>
-            <div style="width: 100%; background-color: rgb(245, 245, 245); margin-left: 2px; padding: 50px;">
-                <nav class="navbar">
-                    <div class="container-fluid">
-                        <h1 style="margin-top: auto; margin-bottom: auto;">User</h1>
+            <div class="full-height">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <h1>ข้อมูลผู้ใช้</h1>
+                    </div>
+                    <div class="col-5">
                         <form class="d-flex" action="/search" method="post">
                             <input class="form-control me-2" type="search" name="search" placeholder="Search FirstName" aria-label="Search">
                             <button class="btn" style="background-color: #1a75ff; color: white;">
@@ -67,7 +70,8 @@
                             </button>
                         </form>
                     </div>
-                </nav>
+                </div>
+                <br>
                 <table class="table">
                     <thead>
                         <tr>
@@ -99,7 +103,13 @@
                             <td><%= item.UserName %></td>
                             <td><%= item.Email %></td>
                             <td><%= item.PhoneNumber %></td>
-                            <td><%= item.TypeUser %></td>
+                            <td>
+                                <% if ( item.TypeUser == '00' ) { %>
+                                    Admin
+                                <% } else { %>
+                                    User
+                                <% } %>
+                            </td>
                             <td>
                                 <form class="d-flex" action="/edit" method="post">
                                     <input type="text" name="edit_user" value="<%= item._id %>" hidden>

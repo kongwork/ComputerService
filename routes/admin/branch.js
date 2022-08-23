@@ -3,13 +3,14 @@ const Faculty = require("../../models/faculties")
 const Branch = require("../../models/branches")
 const router = express.Router()
 
-router.post("/branch", (req, res) => {
+router.get("/branch/:id", (req, res) => {
     const showname = req.session.username
     if (req.session.login && req.session.typeUser == 'Admin') {
         let order = 1
-        Faculty.find().exec((err, faculty) => {
-            Branch.find({ FacultyID: req.body.FacultyID, Branch: { $regex: '^' + '', $options: 'i' }, DeviceID: { $regex: '^' + '', $options: 'i' }}).exec((err, branch) => {
+        Faculty.findOne({ _id: req.params.id}).exec((err, faculty) => {
+            Branch.find({ FacultyID: req.params.id, Branch: { $regex: '^' + '', $options: 'i' }, DeviceID: { $regex: '^' + '', $options: 'i' }}).exec((err, branch) => {
                 res.render("branch", {
+                    faculty_id: req.params.id,
                     faculty: faculty,
                     branch: branch,
                     order: order,

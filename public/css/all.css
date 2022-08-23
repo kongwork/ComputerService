@@ -1,6 +1,8 @@
-body{
+html, body{
+    height: 100%;
+    margin: 0;
     font-family: 'Prompt', sans-serif;
-    background-color: rgb(219, 219, 219)
+    background-color: rgb(219, 219, 219);
 }
 i {
     font-size: 21px;
@@ -51,4 +53,26 @@ td {
     color: #99ff99;
     background-color: #031321;
     text-shadow: 0px 0px 10px #8cf8f1, 0 0 20px #8cf8f1, 0 0 80px #8cf8f1;
+}
+
+.full-height {
+    border-left-style: solid;
+    border-left-color: rgb(219, 219, 219);
+    overflow: auto;
+    height: 881px;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    margin-left: 16%;
+    margin-top: 80px;
+    padding: 50px;
+}
+
+.full-height-nav {
+    background-color: white;
+    width: 16%;
+    margin-top: 80px;
+    list-style-type: none;
+    position: fixed;
+    height: 100%;
+    padding: 25px 30px 0 30px;
 }
