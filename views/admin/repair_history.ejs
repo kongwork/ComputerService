@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/bst5/css/bootstrap.min.css">
+    <script src="/bst5/js/bootstrap.min.js"></script>
+    <script src="/bst5/js/bootstrap.bundle.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/all.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include('navbar') %>
+        <div class="d-flex">
+            <nav class="nav flex-column full-height-nav">
+                <p style="font-size: 20px; text-align: center;">
+                    <b>Menu</b>
+                </p>
+                <a class="nav-link" href="/user" style="color: #333333;">
+                    <i class="bi bi-people"></i>
+                    User
+                </a>
+                <a class="nav-link" href="/faculty" style="color: #333333;">
+                    <i class="bi bi-journal-bookmark"></i>
+                    Faculty or Branch
+                </a>
+                <a class="nav-link" href="/room" style="color: #333333;">
+                    <i class="bi bi-hospital"></i>
+                    Room
+                </a>
+                <a class="nav-link" href="/category" style="color: #333333;">
+                    <i class="bi bi-bookmarks"></i>
+                    Category
+                </a>
+                <a class="nav-link" href="/device" style="color: #1a75ff; text-shadow: 0px 0px 5px #1a75ff">
+                    <i class="bi bi-cpu"></i>
+                    Device
+                </a>
+                <a class="nav-link" href="/maintenance" style="color: #333333;">
+                    <i class="bi bi-wrench-adjustable"></i>
+                    Maintenance
+                </a>
+            </nav>
+            <div class="full-height"><br>
+                <div class="row">
+                    <div class="col">
+                        <h1>ประวัติการซ่อมอุปกรณ์</h1>
+                    </div>
+                    <div class="col-5">
+                        <form class="d-flex" target="_blank" action="/report-history-repair" method="post">
+                            <input type="text" name="id" value="<%= DeviceID %>" hidden>
+                            <button type="submit" class="btn btn-outline-danger" style="margin-left: auto;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <table class="table" style="width:80%">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px; text-align: center;">#</th>
+                            <th style="width: 250px; text-align: center;">วันที่</th>
+                            <th style="text-align: center;">รายละเอียดการแจ้งซ่อม</th>
+                            <th style="text-align: center;">สาเหตุการซ่อม</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% Object.values(history).forEach(function(item){%>
+                        <tr>
+                            <td style="text-align: center;"><%= order++ %></td>
+                            <td style="text-align: center;"><%= item.MTN_Date.toLocaleString('th-TH') %></td>
+                            <td style="word-break:break-all;"><%= item.MTN_Detail %></td>
+                            <td style="word-break:break-all;"><%= item.MTN_Cause %></td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</body>
+
+</html>

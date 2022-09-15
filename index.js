@@ -10,24 +10,28 @@ const logout = require('./routes/logout')
 const ForgotPass = require('./routes/forgot_password')
 const MailResetPass = require('./routes/mail_notify_reset_pass')
 
-const page_admin_user = require('./routes/admin/user')
-const page_admin_faculty = require("./routes/admin/faculty")
-const page_admin_branch = require("./routes/admin/branch")
-const page_admin_category = require("./routes/admin/category")
-const page_admin_device = require("./routes/admin/device")
-const page_admin_maintenance = require("./routes/admin/maintenance")
+const page_admin_user = require('./routes/admin/page/user')
+const page_admin_faculty = require("./routes/admin/page/faculty")
+const page_admin_branch = require("./routes/admin/page/branch")
+const page_admin_category = require("./routes/admin/page/category")
+const page_admin_device = require("./routes/admin/page/device")
+const page_admin_maintenance = require("./routes/admin/page/maintenance")
+const page_admin_room = require("./routes/admin/page/room")
+const page_admin_repair_history = require("./routes/admin/page/repair_history")
 
 const add_user = require("./routes/admin/form_add_data/user")
 const add_faculty = require("./routes/admin/form_add_data/faculty")
 const add_branch = require("./routes/admin/form_add_data/branch")
 const add_category = require("./routes/admin/form_add_data/category")
-const add_device = require("./routes/form_AddDevice")
+const add_device = require("./routes/admin/form_add_data/device")
+const add_room = require("./routes/admin/form_add_data/room")
 
-const edit_user = require("./routes/edit_user")
+const edit_user = require("./routes/admin/edit_data/user")
 const edit_faculty = require("./routes/admin/edit_data/faculty")
 const edit_branch = require("./routes/admin/edit_data/branch")
-const edit_category = require("./routes/edit_category")
-const edit_device = require("./routes/edit_device")
+const edit_category = require("./routes/admin/edit_data/category")
+const edit_device = require("./routes/admin/edit_data/device")
+const edit_room = require("./routes/admin/edit_data/room")
 
 const delete_user = require("./routes/admin/delete_data/delete_user")
 const delete_faculty = require("./routes/admin/delete_data/faculty")
@@ -35,6 +39,7 @@ const delete_branch = require("./routes/admin/delete_data/branch")
 const delete_category = require("./routes/admin/delete_data/delete_category")
 const delete_device = require("./routes/admin/delete_data/delete_device")
 const delete_maintenance = require("./routes/admin/delete_data/delete_maintenance")
+const delete_room = require("./routes/admin/delete_data/room")
 
 const search_user = require("./routes/admin/search_data/search_user")
 const search_category = require("./routes/admin/search_data/search_category")
@@ -46,8 +51,17 @@ const search_list_inform = require("./routes/admin/search_data/search_list_infor
 const search_category_page_user = require("./routes/admin/search_data/search_category_page_user")
 const search_device_page_user = require("./routes/admin/search_data/search_device_page_user")
 
-const CheckMaintenance = require("./routes/admin/CheckMaintenance")
+const CheckMaintenance = require("./routes/admin/page/CheckMaintenance")
+const ImportFileFaculty = require("./routes/admin/form_add_data/import_faculty_xlsx")
+const ImportFileBranch = require("./routes/admin/form_add_data/import_branch_xlsx")
 
+const ReportRepairHistory = require("./routes/admin/report/repair_history")
+const ReportDevice = require("./routes/admin/report/device")
+const dispose = require("./routes/admin/dispose")
+
+const page_user_view_category_device = require("./routes/user/view_category_device")
+const page_user_room = require("./routes/user/page/room")
+const page_user_room_device = require("./routes/user/page/room_device")
 
 
 // For user
@@ -93,18 +107,26 @@ app.use(
     page_admin_category,
     page_admin_device,
     page_admin_maintenance,
+    page_admin_room,
+    page_admin_repair_history,
+
+    page_user_view_category_device,
+    page_user_room,
+    page_user_room_device,
     // เพิ่มข้อมูล
     add_user,
     add_faculty,
     add_branch,
     add_device,
     add_category,
+    add_room,
     // แก้ไขข้อมูล
     edit_faculty,
     edit_branch,
     edit_device,
     edit_category,
     edit_user,
+    edit_room,
     // ลบข้อมูล
     delete_user,
     delete_category,
@@ -112,6 +134,7 @@ app.use(
     delete_faculty,
     delete_device,
     delete_maintenance,
+    delete_room,
     // ค้นหาข้อมูล
     search_user,
     search_category,
@@ -123,8 +146,14 @@ app.use(
     search_category_page_user,
     search_device_page_user,
 
-    CheckMaintenance,
+    ReportRepairHistory,
+    ReportDevice,
 
+    CheckMaintenance,
+    ImportFileFaculty,
+    ImportFileBranch,
+
+    dispose,
     // For User
     ListInform,
     User_Device,

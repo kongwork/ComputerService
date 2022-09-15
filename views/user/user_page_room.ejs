@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/bst5/css/bootstrap.min.css">
+    <script src="/bst5/js/bootstrap.min.js"></script>
+    <script src="/bst5/js/bootstrap.bundle.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/all.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include('navbar') %>
+        <div class="d-flex">
+            <nav class="nav flex-column full-height-nav">
+                <p style="font-size: 20px; text-align: center;">
+                    <b>Menu</b>
+                </p>
+                <a class="nav-link" href="/list_inform" style="color: #333333;">
+                    <i class="bi bi-card-list"></i>
+                    รายการแจ้งซ่อม
+                </a>
+                <a class="nav-link" href="/user-page-room" style="color: #1a75ff; text-shadow: 0px 0px 5px #1a75ff">
+                    <i class="bi bi-hospital"></i>
+                    Room
+                </a>
+                <a class="nav-link" href="/user_category" style="color: #333333;">
+                    <i class="bi bi-bookmarks"></i>
+                    Category
+                </a>
+                <a class="nav-link" href="/user_device" style="color: #333333;">
+                    <i class="bi bi-cpu"></i>
+                    Device
+                </a>
+            </nav>
+            <div class="full-height">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <h1>Room</h1>
+                    </div>
+                    <div class="col-5">
+                        <div style="float:right;">
+                            <form class="d-flex" action="/search-category-page-user" method="post">
+                                <input class="form-control me-2" type="search" name="search" placeholder="Search Room" aria-label="Search" size="30">
+                                <button class="btn" style="background-color: #1a75ff; color: white;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ชื่อห้อง</th>
+                            <th style="text-align: center">
+                                ความจุ
+                            </th>
+                            <th style="text-align: center">
+                                จำนวนอุปกรณ์
+                            </th>
+                            <th>คณะ</th>
+                            <th>สาขา</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% Object.values(room).forEach(function(item,i){%>
+                        <tr>
+                            <td><%= order++ %></td>
+                            <td><%= item.r_name %></td>
+                            <td style="text-align: center">
+                                <%= item.r_capacity %>
+                            </td>
+                            <td style="text-align: center">
+                                <% let id = item._id %>
+                                <% let num = 0 %>
+                                <% for(var i=0; i < device.length; i++) {%>
+                                    <% if (device[i].RoomID.toString() == id.toString()) { %>
+                                        <% num++ %>
+                                    <% } %>
+                                <% } %>
+                                <%= num %>
+                            </td>
+                            <td>
+                                <% let faculty_name %>
+                                <% let faculty_id = item.r_faculty_id %>
+                                <% for(var i=0; i < faculty.length; i++) {%>
+                                    <% if (faculty[i]._id == faculty_id.toString()) { %>
+                                        <% faculty_name = faculty[i].Faculty %>
+                                    <% } %>
+                                <% } %>
+                                <%= faculty_name %>
+                            </td>
+                            <td>
+                                <% let branch_name %>
+                                <% let branch_id = item.r_branch_id %>
+                                <% for(var i=0; i < branch.length; i++) {%>
+                                    <% if (branch[i]._id == branch_id.toString()) { %>
+                                        <% branch_name = branch[i].Branch %>
+                                    <% } %>
+                                <% } %>
+                                <%= branch_name %>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-primary" href="/user-page-room/device/<%= item._id %>">
+                                    อุปกรณ์
+                                </a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                        <form action="/MultiDelete-room" method="post" id="gg">
+                            <input class="form-check-input" id="deleteArray" name="deleteArray" type="text" style="display: none">
+                        </form>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</body>
+
+</html>

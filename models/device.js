@@ -10,15 +10,16 @@ mongoose.connect(dbUrl, {
 
 // design Schema
 let deviceSchema = mongoose.Schema({
+    RoomID: { type: mongoose.Schema.Types.ObjectId, ref: 'room' },
     CategoryID: { type: mongoose.Schema.Types.ObjectId, ref: 'categorys' },
     FacultyID: { type: mongoose.Schema.Types.ObjectId, ref: 'faculties' },
     BranchID: { type: mongoose.Schema.Types.ObjectId, ref: 'branches' },
     DeviceName: String,
     CategoryName: String,
     DeviceCode: String,
-    Room: String,
     Price: Number,
     Date: Date,
+    DateDispose: Date,
     DeviceStatus: String
 });
 

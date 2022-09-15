@@ -22,9 +22,9 @@ router.post("/InsertFaculty", (req, res) => {
         }
         
     });*/
-    const show_modal = !req.body.modal
+    //const show_modal = !req.body.modal
     // console.log(show_modal)
-    Faculty.findOne({ Faculty: req.body.faculty, Order: req.body.order }).exec((err, doc) => {
+    //Faculty.findOne({ Faculty: req.body.faculty, Order: req.body.order }).exec((err, doc) => {
         let data = new Faculty({
             Faculty: req.body.faculty
         })
@@ -61,7 +61,7 @@ router.post("/InsertFaculty", (req, res) => {
             })
             res.redirect('faculty')
         }*/
-    })
+    //})
 })
 
 module.exports = router

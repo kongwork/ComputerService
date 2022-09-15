@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/bst5/css/bootstrap.min.css">
+    <script src="/bst5/js/bootstrap.min.js"></script>
+    <script src="/bst5/js/bootstrap.bundle.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/all.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include('navbar') %>
+        <div class="d-flex">
+            <nav class="nav flex-column full-height-nav">
+                <p style="font-size: 20px; text-align: center;">
+                    <b>Menu</b>
+                </p>
+                <a class="nav-link" href="/user" style="color: #333333;">
+                    <i class="bi bi-people" style="margin-top: 10px;"></i>
+                    User
+                </a>
+                <a class="nav-link" href="/faculty" style="color: #333333;">
+                    <i class="bi bi-journal-bookmark"></i>
+                    Faculty or Branch
+                </a>
+                <a class="nav-link" href="/room" style="color: #1a75ff; text-shadow: 0px 0px 5px #1a75ff">
+                    <i class="bi bi-hospital"></i>
+                    Room
+                </a>
+                <a class="nav-link" href="/category" style="color: #333333;">
+                    <i class="bi bi-bookmarks"></i>
+                    Category
+                </a>
+                <a class="nav-link" href="/device" style="color: #333333;">
+                    <i class="bi bi-cpu"></i>
+                    Device
+                </a>
+                <a class="nav-link" href="/maintenance" style="color: #333333;">
+                    <i class="bi bi-wrench-adjustable"></i>
+                    Maintenance
+                </a>
+            </nav>
+            <div class="full-height">
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <h1>Room</h1>
+                    </div>
+                    <div class="col-5">
+                        <form class="d-flex" action="/search" method="post">
+                            <input class="form-control me-2" type="search" name="search" placeholder="Search FirstName" aria-label="Search">
+                            <button class="btn me-1" style="background-color: #1a75ff; color: white;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg>
+                            </button>
+                            <button name='modal' type="button" class="btn btn-warning me-1" data-bs-toggle="modal" data-bs-target="#ModalAddRoom" style="width: 150px;">
+                                เพิ่มข้อมูล
+                            </button>
+                            <button id="show" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#MultiDelete">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                    <path fill-rule="evenodd"d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ชื่อห้อง</th>
+                            <th style="text-align: center">
+                                ความจุ
+                            </th>
+                            <th style="text-align: center">
+                                จำนวนอุปกรณ์
+                            </th>
+                            <th>คณะ</th>
+                            <th>สาขา</th>
+                            <th></th>
+                            <th></th>
+                            <th>
+                                <input class="form-check-input" type="checkbox" onclick="CheckAll(this);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
+                                    <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
+                                </svg>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% Object.values(room).forEach(function(item,i){%>
+                        <tr>
+                            <td><%= order++ %></td>
+                            <td><%= item.r_name %></td>
+                            <td style="text-align: center">
+                                <%= item.r_capacity %>
+                            </td>
+                            <td style="text-align: center">
+                                <% let id = item._id %>
+                                <% let num = 0 %>
+                                <% for(var i=0; i < device.length; i++) {%>
+                                    <% if (device[i].RoomID.toString() == id.toString()) { %>
+                                        <% num++ %>
+                                    <% } %>
+                                <% } %>
+                                <%= num %>
+                            </td>
+                            <td>
+                                <% let faculty_name %>
+                                <% let faculty_id = item.r_faculty_id %>
+                                <% for(var i=0; i < faculty.length; i++) {%>
+                                    <% if (faculty[i]._id == faculty_id.toString()) { %>
+                                        <% faculty_name = faculty[i].Faculty %>
+                                    <% } %>
+                                <% } %>
+                                <%= faculty_name %>
+                            </td>
+                            <td>
+                                <% let branch_name %>
+                                <% let branch_id = item.r_branch_id %>
+                                <% for(var i=0; i < branch.length; i++) {%>
+                                    <% if (branch[i]._id == branch_id.toString()) { %>
+                                        <% branch_name = branch[i].Branch %>
+                                    <% } %>
+                                <% } %>
+                                <%= branch_name %>
+                            </td>
+                            <td>
+                                <button class="btn edit-room" type="button" data-bs-toggle="modal" data-bs-target="#ModalEditRoom" data-name="<%= item.r_name %>"
+                                    data-capacity="<%= item.r_capacity %>" data-id="<%= item._id %>" data-branch="<%= branch_name %>" data-faculty="<%= faculty_name %>"
+                                    data-facultyid="<%= faculty_id %>" data-branchid="<%= branch_id %>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                    </svg>
+                                </button>
+                            </td>
+                            <td>
+                                <a class="btn" href="/delete-room/<%= item._id %>" onclick="return confirm('ต้องการที่จะลบข้อมูล ?')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                                        viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                        <path fill-rule="evenodd"d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                    </svg>
+                                </a>
+                            </td>
+                            <td>
+                                <form>
+                                    <input class="form-check-input check-delete" type="checkbox" name='StockID-<%= i %>' value="<%= item._id %>" onclick="checkDelete();">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                    </label>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                    </svg>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                        <form action="/MultiDelete-room" method="post" id="gg">
+                            <input class="form-check-input" id="deleteArray" name="deleteArray" type="text" style="display: none">
+                        </form>
+                    </tbody>
+                </table>
+                <!-- Modal Add Room -->
+                <div class="modal fade" id="ModalAddRoom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">เพิ่มห้อง</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/add-room" class="needs-validation" novalidate method="post" id="InsertFaculty">
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <label class="form-label">คณะ</label>
+                                            <select name="faculty_id" id="faculty" class="form-select" required>
+                                                <option value="">--- เลือกคณะ ---</option>
+                                                <% Object.values(faculty).forEach(function(item){%>
+                                                    <option value="<%= item._id %>">
+                                                        <%= item.Faculty %>
+                                                    </option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col mb-3">
+                                            <label class="form-label">สาขา</label>
+                                            <select name="branch_id" id="branch" class="form-select" required>
+                                                <option value="">--- เลือกสาขา ---</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">ชื่อห้อง:</label>
+                                        <input type="text" class="form-control faculty" name="name" required>
+                                    </div>
+                                    <div class="mb-3" style="width: 150px;">
+                                        <label for="message-text" class="col-form-label">ความจุ:</label>
+                                        <input type="number" class="form-control faculty" name="capacity" value="0" required>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" form="InsertFaculty">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Edit Room -->
+                <div class="modal fade" id="ModalEditRoom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">แก้ไขข้อมูลห้อง</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/edit-room" class="needs-validation" novalidate method="post" id="edit-room">
+                                    <div class="row mb-3">
+                                        <label for="message-text" class="col-2 col-form-label">id :</label>
+                                        <div class="col">
+                                            <input id="id-room" readonly type="text" class="form-control-plaintext" name="id_room">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="message-text" class="col-2 col-form-label">คณะ :</label>
+                                        <div class="col">
+                                            <input id="faculty_name" readonly type="text" class="form-control-plaintext">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="message-text" class="col-2 col-form-label">สาขา :</label>
+                                        <div class="col">
+                                            <input id="branch_name" readonly type="text" class="form-control-plaintext">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="message-text" class="col-2 col-form-label">ชื่อห้อง :</label>
+                                        <div class="col">
+                                            <input id="room_name" readonly type="text" class="form-control-plaintext">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="message-text" class="col-2 col-form-label">ความจุ :</label>
+                                        <div class="col">
+                                            <input id="capacity" readonly type="text" class="form-control-plaintext" required style="width: 150px;">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <hr>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <label class="form-label">คณะ</label>
+                                            <select name="faculty_id" id="faculty_edit" class="form-select" required>
+                                                <option value="">--- เลือกคณะ ---</option>
+                                                <option id="update_faculty" selected hidden></option>
+                                                <% Object.values(faculty).forEach(function(item){%>
+                                                    <option value="<%= item._id %>">
+                                                        <%= item.Faculty %>
+                                                    </option>
+                                                <% }) %>
+                                            </select>
+                                        </div>
+                                        <div class="col mb-3">
+                                            <label class="form-label">สาขา</label>
+                                            <select name="branch_id" id="branch_edit" class="form-select" required>
+                                                <option value="">--- เลือกสาขา ---</option>
+                                                <option id="update_branch" selected hidden></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">ชื่อห้อง:</label>
+                                        <input id="update_room_name" type="text" class="form-control faculty" name="name">
+                                    </div>
+                                    <div class="mb-3" style="width: 150px;">
+                                        <label for="message-text" class="col-form-label">ความจุ:</label>
+                                        <input id="update_capacity" type="number" class="form-control faculty" name="capacity">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" form="edit-room">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal MultiDelete -->
+                <div class="modal fade" id="MultiDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">ลบห้อง</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" style="text-align: center;">
+                                ต้องการลบข้อมูลหรือไม่
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                                <input class="btn btn-danger" type="submit" value="ตกลง" form="gg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+<script>
+    $(document).on("click", ".edit-room", function () {
+        let id_room = $(this).data('id');
+        let faculty = $(this).data('faculty');
+        let branch = $(this).data('branch');
+        let name = $(this).data('name');
+        let capacity = $(this).data('capacity');
+        
+        let update_room_name = $(this).data('name');
+        let update_capacity = $(this).data('capacity');
+        let update_faculty_id = $(this).data('facultyid');
+        let update_branch_id = $(this).data('branchid');
+
+        $('#id-room').val(id_room);
+        $('#faculty_name').val(faculty);
+        $('#branch_name').val(branch);
+        $('#room_name').val(name);
+        $('#capacity').val(capacity);
+
+        $('#update_room_name').val(update_room_name);
+        $('#update_capacity').val(update_capacity);
+        $('#update_faculty').val(update_faculty_id).html(faculty);
+        $('#update_branch').val(update_branch_id).html(branch);
+    });
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+    $(function(){
+        let facultyObject = $('#faculty');
+        let branchObject = $('#branch');
+        
+        // on change faculty
+        facultyObject.on('change', function(){
+            let facultyId = $(this).val();
+
+            let data = JSON.parse('<%- JSON.stringify(branch) %>')
+            let arr = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].FacultyID == facultyId) {
+                    arr.push(data[i]);
+                }
+            }
+
+            branchObject.html('<option value="">--- เลือกสาขา ---</option>');
+            
+            $.each(arr, function(index, item){
+                branchObject.append(
+                    $('<option></option>').val(item._id).html(item.Branch)
+                );
+            });
+        });
+    });
+
+    $(function(){
+        let facultyObject = $('#faculty_edit');
+        let branchObject = $('#branch_edit');
+        
+        // on change faculty
+        facultyObject.on('change', function(){
+            let facultyId = $(this).val();
+
+            let data = JSON.parse('<%- JSON.stringify(branch) %>')
+            let arr = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].FacultyID == facultyId) {
+                    arr.push(data[i]);
+                }
+            }
+
+            branchObject.html('<option value="">--- เลือกสาขา ---</option>');
+            
+            $.each(arr, function(index, item){
+                branchObject.append(
+                    $('<option></option>').val(item._id).html(item.Branch)
+                );
+            });
+        });
+    });
+
+    function CheckAll(source) {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] != source)
+            {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+        var checkedValue = []; 
+        checkboxes.forEach(item => {
+            checkedValue.push(item.value);
+        });
+        !source.checked ? document.getElementById('deleteArray').value = '' : document.getElementById('deleteArray').value = checkedValue.slice(1);
+    }
+    function checkDelete() {
+        var checkedValue = []; 
+        const a = document.querySelectorAll('.check-delete:checked')
+        a.forEach(item => {
+            checkedValue.push(item.value);
+        });
+        document.getElementById('deleteArray').value = checkedValue
+    }
+</script>
+
+</html>

@@ -51,6 +51,12 @@
                 <br>
                 <br>
                 <div style="margin:0px auto;max-width:1036px">
+                    <% if ( capacity_fail ) { %>
+                        <div class="alert alert-danger" role="alert" style="text-align: center;">
+                            <i class="bi bi-exclamation-triangle" style="margin-right: 10px;"></i>
+                            จำนวนของอุปกรณ์ในห้องเต็มแล้ว
+                        </div>
+                    <% } %>
                     <form action="/insertDevice" method="post">
                         <div class="mb-4" style="width: 300px;">
                             <label class="form-label">หมายเลขอุปกรณ์</label>
@@ -64,7 +70,7 @@
                             <div class="col">
                                 <label class="form-label">หมวดหมู่</label>
                                 <select class="form-select" name="category_id" aria-label="Default select example" required>
-                                    <option value="" selected>เลือกหมวดหมู่</option>
+                                    <option value="" selected>--- เลือกหมวดหมู่ ---</option>
                                     <% Object.values(categorys).forEach(function(item){%>
                                         <option value="<%= item._id %>">
                                             <%= item.CategoryName %>
@@ -74,14 +80,10 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col col-2">
-                                <label class="form-label">หมายเลขห้อง</label>
-                                <input type="text" class="form-control" name="room" required>
-                            </div>
                             <div class="col">
                                 <label class="form-label">คณะ</label>
-                                <select name="faculty_id" id="faculty" class="form-select">
-                                    <option value="">เลือกคณะ</option>
+                                <select name="faculty_id" id="faculty" class="form-select" required>
+                                    <option value="">--- เลือกคณะ ---</option>
                                     <% Object.values(faculty).forEach(function(item){%>
                                         <option value="<%= item._id %>">
                                             <%= item.Faculty %>
@@ -91,8 +93,14 @@
                             </div>
                             <div class="col">
                                 <label class="form-label">สาขา</label>
-                                <select name="branch_id" id="branch" class="form-select">
-                                    <option value="">เลือกสาขา</option>
+                                <select name="branch_id" id="branch" class="form-select" required>
+                                    <option value="">--- เลือกสาขา ---</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">ห้อง</label>
+                                <select name="room_id" id="room" class="form-select" required>
+                                    <option value="">--- เลือกห้อง ---</option>
                                 </select>
                             </div>
                         </div>
@@ -110,16 +118,17 @@
                                 <div style="margin-top: 5px;">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="status" value="0" checked>
-                                        <label class="form-check-label" for="exampleRadios1">
+                                        <label class="form-check-label">
                                             ใช้งานปกติ
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="status" value="1">
-                                        <label class="form-check-label" for="exampleRadios1">
+                                        <label class="form-check-label">
                                             กำลังซ่อมแซม
                                         </label>
                                     </div>
+                                </div>
                             </div>
                         </div>
                         <br>
@@ -148,6 +157,7 @@
     $(function(){
         var facultyObject = $('#faculty');
         var branchObject = $('#branch');
+        var roomObject = $('#room');
         
         // on change faculty
         facultyObject.on('change', function(){
@@ -161,11 +171,33 @@
                 }
             }
 
-            branchObject.html('<option value="">เลือกสาขา</option>');
-            
+            branchObject.html('<option value="">--- เลือกสาขา ---</option>');
+            roomObject.html('<option value="">--- เลือกห้อง ---</option>');
+
             $.each(arr, function(index, item){
                 branchObject.append(
                     $('<option></option>').val(item._id).html(item.Branch)
+                );
+            });
+        });
+
+        // on change branch
+        branchObject.on('change', function(){
+            var branchId = $(this).val();
+
+            let data = JSON.parse('<%- JSON.stringify(room) %>')
+            let arr = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].r_branch_id == branchId) {
+                    arr.push(data[i]);
+                }
+            }
+
+            roomObject.html('<option value="">--- เลือกห้อง ---</option>');
+            
+            $.each(arr, function(index, item){
+                roomObject.append(
+                    $('<option></option>').val(item._id).html(item.r_name)
                 );
             });
         });

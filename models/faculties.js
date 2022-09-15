@@ -10,10 +10,6 @@ mongoose.connect(dbUrl, {
 
 // design Schema
 let facultiesSchema = mongoose.Schema({
-    Order: {
-        type: Number,
-        unique: true // email must be unique
-    },
     Faculty: String
 });
 

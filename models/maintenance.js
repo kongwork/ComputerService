@@ -18,10 +18,10 @@ let maintenanceSchema = mongoose.Schema({
     DeviceID: String,
     DeviceName: String,
     MTN_Status: String,
-    MTN_Room: String,
     MTN_Date: Date,
     MTN_CheckDate: Date,
     MTN_Detail: String,
+    MTN_Cause: String,
     MTN_Img:[]
 });
 

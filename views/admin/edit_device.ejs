@@ -78,10 +78,6 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col col-2">
-                                <label class="form-label">หมายเลขห้อง</label>
-                                <input type="text" class="form-control" value="<%= devices.Room %>" name="room" required>
-                            </div>
                             <div class="col">
                                 <label class="form-label">คณะ</label>
                                 <select name="faculty_id" id="faculty" class="form-select">
@@ -93,7 +89,7 @@
                                         <option value="<%= item._id %>">
                                             <%= item.Faculty %>
                                         </option>
-                                        <% }) %>
+                                    <% }) %>
                                 </select>
                             </div>
                             <div class="col">
@@ -102,6 +98,16 @@
                                     <option value="<%= find_branch._id %>" selected hidden>
                                         <%= find_branch.Branch %>
                                     </option>
+                                    <option value="">--- เลือกสาขา ---</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label class="form-label">ห้อง</label>
+                                <select name="room_id" id="room" class="form-select" required>
+                                    <option value="<%= find_room._id %>" selected hidden>
+                                        <%= find_room.r_name %>
+                                    </option>
+                                    <option value="">--- เลือกห้อง ---</option>
                                 </select>
                             </div>
                         </div>
@@ -173,6 +179,7 @@
     $(function(){
         var facultyObject = $('#faculty');
         var branchObject = $('#branch');
+        var roomObject = $('#room');
         
         // on change faculty
         facultyObject.on('change', function(){
@@ -186,11 +193,33 @@
                 }
             }
 
-            branchObject.html('<option value="">เลือกสาขา</option>');
-            
+            branchObject.html('<option value="">--- เลือกสาขา ---</option>');
+            roomObject.html('<option value="">--- เลือกห้อง ---</option>');
+
             $.each(arr, function(index, item){
                 branchObject.append(
                     $('<option></option>').val(item._id).html(item.Branch)
+                );
+            });
+        });
+
+        // on change branch
+        branchObject.on('change', function(){
+            var branchId = $(this).val();
+
+            let data = JSON.parse('<%- JSON.stringify(room) %>')
+            let arr = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].r_branch_id == branchId) {
+                    arr.push(data[i]);
+                }
+            }
+
+            roomObject.html('<option value="">--- เลือกห้อง ---</option>');
+            
+            $.each(arr, function(index, item){
+                roomObject.append(
+                    $('<option></option>').val(item._id).html(item.r_name)
                 );
             });
         });

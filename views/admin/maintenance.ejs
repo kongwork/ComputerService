@@ -29,6 +29,10 @@
                     <i class="bi bi-journal-bookmark"></i>
                     Faculty or Branch
                 </a>
+                <a class="nav-link" href="/room" style="color: #333333;">
+                    <i class="bi bi-hospital"></i>
+                    Room
+                </a>
                 <a class="nav-link" href="/category" style="color: #333333;">
                     <i class="bi bi-bookmarks"></i>
                     Category
@@ -110,7 +114,7 @@
                             <th>ชื่ออุปกรณ์</th>
                             <th>ห้อง</th>
                             <th>ผู้แจ้ง</th>
-                            <th>วันที่แจ้ง</th>
+                            <th style="text-align: center;">วันที่แจ้ง</th>
                             <th style="text-align: center;">สถานะ</th>
                             <th></th>
                             <th></th>
@@ -128,9 +132,24 @@
                             <td><%= order++ %></td>
                             <td><%= item.DeviceID %></td>
                             <td><%= item.DeviceName %></td>
-                            <td><%= item.MTN_Room %></td>
+                            <td>
+                                <% let id = item.DeviceID %>
+                                <% for(var i=0; i < device.length; i++) {%>
+                                    <% if (device[i].DeviceCode == id) { %>
+                                        <% for(var i=0; i < room.length; i++) {%>
+                                            <% if (room[i]._id.toString() == device[i].RoomID.toString()) { %>
+                                                <%= room[i].r_name %>
+                                                <% break; %>
+                                            <% } %>
+                                        <% } %>
+                                        <% break; %>
+                                    <% } %>
+                                <% } %>
+                            </td>
                             <td><%= item.UserInform %></td>
-                            <td><%= item.MTN_Date.toLocaleString('th-TH') %></td>
+                            <td style="text-align: center;">
+                                <%= item.MTN_Date.toLocaleString('th-TH').substring(0, 8) %>
+                            </td>
                             <td style="text-align: center;">
                                 <% if (item.MTN_Status == '1' ) { %>
                                     <span class="badge rounded-pill bg-warning text-dark">
