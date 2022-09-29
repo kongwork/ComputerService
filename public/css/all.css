@@ -99,3 +99,8 @@ td {
     height: 100%;
     padding: 25px 30px 0 30px;
 }
+
+.no-underline {
+    color: #3873ad;
+    text-decoration: none;
+}

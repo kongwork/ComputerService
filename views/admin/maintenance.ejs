@@ -14,13 +14,6 @@
     <title>Document</title>
 </head>
 
-<style>
-    a {
-        color: #3873ad;
-        text-decoration:none;
-    }
-</style>
-
 <body>
     <%- include('navbar') %>
         <div class="d-flex">
@@ -143,11 +136,11 @@
                     </div>
                     <div class="col" style="margin: auto;">
                         <div style="float: right;">
-                            <a class="me-2" style="margin-left: auto;" href="/maintenance" role="button">ทั้งหมด <span class="badge text-bg-secondary"><%= statusAll %></span></a>
-                            <a class="me-2" href="/search-mtn-1">รอการตรวจเช็ค <span class="badge text-bg-secondary"><%= statusID1 %></a>
-                            <a class="me-2" href="/search-mtn-2" role="button">กำลังซ่อมแซม <span class="badge text-bg-secondary"><%= statusID2 %></a>
-                            <a class="me-2" href="/search-mtn-3" role="button">ซ่อมแซ่มแล้ว <span class="badge text-bg-secondary"><%= statusID3 %></a>
-                            <a href="/search-mtn-0" role="button">ยกเลิกแล้ว <span class="badge text-bg-secondary"><%= statusID0 %></a>
+                            <a class="me-2 no-underline" style="margin-left: auto;" href="/maintenance" role="button">ทั้งหมด <span class="badge text-bg-secondary"><%= statusAll %></span></a>
+                            <a class="me-2 no-underline" href="/search-mtn-1">รอการตรวจเช็ค <span class="badge text-bg-secondary"><%= statusID1 %></a>
+                            <a class="me-2 no-underline" href="/search-mtn-2" role="button">กำลังซ่อมแซม <span class="badge text-bg-secondary"><%= statusID2 %></a>
+                            <a class="me-2 no-underline" href="/search-mtn-3" role="button">ซ่อมแซ่มแล้ว <span class="badge text-bg-secondary"><%= statusID3 %></a>
+                            <a class="no-underline" href="/search-mtn-0" role="button">ยกเลิกแล้ว <span class="badge text-bg-secondary"><%= statusID0 %></a>
                         </div>
                     </div>
                 </div>
