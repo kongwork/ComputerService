@@ -14,6 +14,13 @@
     <title>Document</title>
 </head>
 
+<style>
+    a {
+        color: #3873ad;
+        text-decoration:none;
+    }
+</style>
+
 <body>
     <%- include('navbar') %>
         <div class="d-flex">
@@ -101,35 +108,48 @@
                             <% statusID3++ %>
                         <% } %>
                     <% } %>
-                    <div class="col-5">
-                        <div style="float:right;">
-                            <form class="d-flex" action="/search-mtn" method="post">
-                                <input class="form-control me-2" type="search" name="search" placeholder="ค้นหารหัสอุปกรณ์" aria-label="Search" size="20">
-                                <button class="btn me-1" style="background-color: #1a75ff; color: white;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    <div class="col-5" style="margin: auto;">
+                        <div style="float: right;">
+                            <% if ( type_user=='Admin' ) { %>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#MultiDelete" style="white-space: nowrap;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                        <path fill-rule="evenodd"d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                                     </svg>
+                                    ลบรายการ
                                 </button>
-                                <% if ( type_user=='Admin' ) { %>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#MultiDelete" style="white-space: nowrap;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                            <path fill-rule="evenodd"d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                        </svg>
-                                        ลบรายการ
-                                    </button>
-                                <% } %>
-                            </form>
+                            <% } %>
                         </div>
                     </div>
                 </div>
+                <hr>
                 <br>
-                <div class="col">
-                    <a class="btn btn-secondary " href="/maintenance" role="button">ทั้งหมด ( <%= statusAll %> )</a>
-                    <a class="btn btn-warning" href="/search-mtn-1">รอการตรวจเช็ค ( <%= statusID1 %> )</a>
-                    <a class="btn btn-info" href="/search-mtn-2" role="button">กำลังซ่อมแซม ( <%= statusID2 %> )</a>
-                    <a class="btn btn-success" href="/search-mtn-3" role="button">ซ่อมแซ่มแล้ว ( <%= statusID3 %> )</a>
-                    <a class="btn btn-danger" href="/search-mtn-0" role="button">ยกเลิกแล้ว ( <%= statusID0 %> )</a>
+                <div class="row">
+                    <div class="col">
+                        <form class="d-flex" action="/search-mtn" method="post">
+                            <div class="mb-3">
+                                <label>ค้นหารหัสอุปกรณ์</label>
+                                <div style="display: flex; flex-flow: row wrap;">
+                                    <input class="form-control me-2" type="search" name="search" aria-label="Search" style="width: 300px;">
+                                    <button class="btn" style="background-color: #0073e6; color: white; white-space: nowrap;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                        </svg>
+                                        ค้นหา
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col" style="margin: auto;">
+                        <div style="float: right;">
+                            <a class="me-2" style="margin-left: auto;" href="/maintenance" role="button">ทั้งหมด <span class="badge text-bg-secondary"><%= statusAll %></span></a>
+                            <a class="me-2" href="/search-mtn-1">รอการตรวจเช็ค <span class="badge text-bg-secondary"><%= statusID1 %></a>
+                            <a class="me-2" href="/search-mtn-2" role="button">กำลังซ่อมแซม <span class="badge text-bg-secondary"><%= statusID2 %></a>
+                            <a class="me-2" href="/search-mtn-3" role="button">ซ่อมแซ่มแล้ว <span class="badge text-bg-secondary"><%= statusID3 %></a>
+                            <a href="/search-mtn-0" role="button">ยกเลิกแล้ว <span class="badge text-bg-secondary"><%= statusID0 %></a>
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <table class="table">

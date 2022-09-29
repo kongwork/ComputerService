@@ -83,7 +83,7 @@
                     <div class="col-5" style="margin: auto;">
                         <% if ( type_user=='Admin' ) { %>
                             <div style="float: right;">
-                                <button type="button" class="me-1 btn" data-bs-toggle="modal" data-bs-target="#ModalAddProduct" style="white-space: nowrap;color: white; background-color: #00b386;">
+                                <button type="button" class="me-1 bt-add btn" data-bs-toggle="modal" data-bs-target="#ModalAddProduct">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                     </svg>
@@ -123,9 +123,9 @@
                             <th style="width: 35px; text-align: center;">#</th>
                             <th style="width: 250px">รหัสผลิตภัณฑ์</th>
                             <th>ชื่อผลิตภัณฑ์</th>
-                            <th>จำนาน</th>
-                            <th>ราคาต่อหน่วย</th>
-                            <th>ราคารวม</th>
+                            <th style="text-align: center;">จำนาน</th>
+                            <th style="text-align: center;">ราคาต่อหน่วย</th>
+                            <th style="text-align: center;">ราคารวม</th>
                             <th></th>
                             <% if ( type_user=='Admin' ) { %>
                                 <th></th>
@@ -145,13 +145,13 @@
                             <td style="width: 30px; text-align: center;"><%= order++ %></td>
                             <td><%= item._id %></td>
                             <td><%= item.product_name %></td>
-                            <td><%= item.product_number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %></td>
-                            <td><%= item.product_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %></td>
-                            <td>
+                            <td style="text-align: center;"><%= item.product_number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %></td>
+                            <td style="text-align: center;"><%= item.product_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %></td>
+                            <td style="text-align: center;">
                                 <% let total = item.product_number * item.product_price %>
                                 <%= total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <button class="btn add-cart" type="button" data-bs-toggle="modal" data-bs-target="#modal-add-order" data-cart-id="<%= item._id %>"
                                     data-cart-name="<%= item.product_name %>" data-cart-number="<%= item.product_number %>" data-cart-price="<%= item.product_price %>">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
@@ -161,7 +161,7 @@
                                 </button>
                             </td>
                             <% if ( type_user=='Admin' ) { %>
-                                <td>
+                                <td style="text-align: center;">
                                     <button class="btn edit-product" type="button" data-bs-toggle="modal" data-bs-target="#ModalEditProduct" data-id="<%= item._id %>"
                                         data-name="<%= item.product_name %>" data-number="<%= item.product_number %>" data-price="<%= item.product_price %>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -170,7 +170,7 @@
                                         </svg>
                                     </button>
                                 </td>
-                                <td>
+                                <td style="text-align: center;">
                                     <a class="btn" href="/delete-product/<%= item._id %>" onclick="return confirm('ต้องการที่จะลบข้อมูล ?')">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
                                             viewBox="0 0 16 16">

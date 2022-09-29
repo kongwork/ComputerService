@@ -14,7 +14,7 @@ router.post("/searchCategory", (req, res) => {
     else {
         Device.find().exec((err, device) => {
             Category.find(query).exec((err, doc) => {
-                res.render("search_category", {
+                res.render("category", {
                     devices: device,
                     categorys: doc,
                     order: order,

@@ -15,6 +15,18 @@ thead {
     color: #e6e6e6;
 }
 .bt-add {
+    white-space: nowrap;
+    background-color: #00cc99;
+    color: white;
+}
+.bt-import {
+    color: black;
+    border: 1px solid black;
+}
+.bt-import:hover {
+    background-color: #cccccc;
+}
+.bt-add:hover {
     background-color: #00b386;
     color: white;
 }
