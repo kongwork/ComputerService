@@ -10,6 +10,14 @@ i {
 a {
     white-space: nowrap;
 }
+thead {
+    background-color: #204060;
+    color: #e6e6e6;
+}
+.bt-add {
+    background-color: #00b386;
+    color: white;
+}
 .center {
     margin-left: auto;
     margin-right: auto;

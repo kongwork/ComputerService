@@ -9,13 +9,12 @@ router.post("/search-list-inform", (req, res) => {
         res.redirect("/list_inform")
     }
     else {
-        Maintenance.find({ UserID: req.session.userid, DeviceName: { $regex: '^' + req.body.search, $options: 'i' } }).exec((err, doc) => {
-            res.render('search_list_inform', {
+        Maintenance.find({ UserID: req.session.userid, DeviceID: { $regex: '^' + req.body.search, $options: 'i' } }).exec((err, doc) => {
+            res.render('list_inform', {
                 MTN: doc,
                 order: 1,
                 showname: showname
             })
-            console.log(doc)
         })
     }
 })

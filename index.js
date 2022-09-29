@@ -18,6 +18,10 @@ const page_admin_device = require("./routes/admin/page/device")
 const page_admin_maintenance = require("./routes/admin/page/maintenance")
 const page_admin_room = require("./routes/admin/page/room")
 const page_admin_repair_history = require("./routes/admin/page/repair_history")
+const page_admin_stock = require("./routes/admin/page/stock")
+const page_admin_cart = require("./routes/admin/page/cart")
+const page_admin_my_history_withdraw = require("./routes/admin/page/my_history_withdraw")
+const page_admin_all_history_withdraw = require("./routes/admin/page/all_history_withdraw")
 
 const add_user = require("./routes/admin/form_add_data/user")
 const add_faculty = require("./routes/admin/form_add_data/faculty")
@@ -25,6 +29,8 @@ const add_branch = require("./routes/admin/form_add_data/branch")
 const add_category = require("./routes/admin/form_add_data/category")
 const add_device = require("./routes/admin/form_add_data/device")
 const add_room = require("./routes/admin/form_add_data/room")
+const add_product = require("./routes/admin/form_add_data/product")
+const add_order = require("./routes/admin/form_add_data/order")
 
 const edit_user = require("./routes/admin/edit_data/user")
 const edit_faculty = require("./routes/admin/edit_data/faculty")
@@ -32,6 +38,8 @@ const edit_branch = require("./routes/admin/edit_data/branch")
 const edit_category = require("./routes/admin/edit_data/category")
 const edit_device = require("./routes/admin/edit_data/device")
 const edit_room = require("./routes/admin/edit_data/room")
+const edit_product = require("./routes/admin/edit_data/product")
+const edit_order = require("./routes/admin/edit_data/order")
 
 const delete_user = require("./routes/admin/delete_data/delete_user")
 const delete_faculty = require("./routes/admin/delete_data/faculty")
@@ -40,16 +48,21 @@ const delete_category = require("./routes/admin/delete_data/delete_category")
 const delete_device = require("./routes/admin/delete_data/delete_device")
 const delete_maintenance = require("./routes/admin/delete_data/delete_maintenance")
 const delete_room = require("./routes/admin/delete_data/room")
+const delete_product = require("./routes/admin/delete_data/product")
+const delete_order = require("./routes/admin/delete_data/order")
 
-const search_user = require("./routes/admin/search_data/search_user")
+const search_user = require("./routes/admin/search_data/user")
 const search_category = require("./routes/admin/search_data/search_category")
+const search_room = require("./routes/admin/search_data/room")
+const search_product = require("./routes/admin/search_data/product")
 const search_device = require("./routes/admin/search_data/search_device")
 const search_maintenance = require("./routes/admin/search_data/search_maintenance")
 const search_faculty = require("./routes/admin/search_data/search_faculty")
 const search_branch = require("./routes/admin/search_data/search_branch")
-const search_list_inform = require("./routes/admin/search_data/search_list_inform")
-const search_category_page_user = require("./routes/admin/search_data/search_category_page_user")
-const search_device_page_user = require("./routes/admin/search_data/search_device_page_user")
+const search_list_inform = require("./routes/user/search_data/list_inform")
+const search_category_page_user = require("./routes/user/search_data/category")
+const search_device_page_user = require("./routes/user/search_data/device")
+const search_room_page_user = require("./routes/user/search_data/room")
 
 const CheckMaintenance = require("./routes/admin/page/CheckMaintenance")
 const ImportFileFaculty = require("./routes/admin/form_add_data/import_faculty_xlsx")
@@ -57,13 +70,16 @@ const ImportFileBranch = require("./routes/admin/form_add_data/import_branch_xls
 
 const ReportRepairHistory = require("./routes/admin/report/repair_history")
 const ReportDevice = require("./routes/admin/report/device")
+const report_my_withdraw = require("./routes/admin/report/my_withdraw")
+const report_all_withdraw = require("./routes/admin/report/all_withdraw")
+
 const dispose = require("./routes/admin/dispose")
 
 const page_user_view_category_device = require("./routes/user/view_category_device")
 const page_user_room = require("./routes/user/page/room")
 const page_user_room_device = require("./routes/user/page/room_device")
 
-
+const withdraw = require("./routes/admin/form_add_data/withdraw")
 // For user
 // List Inform
 const ListInform = require("./routes/list_inform")
@@ -84,6 +100,7 @@ const app = express()
 app.set('views', [
     __dirname + '/views',
     __dirname + '/views/admin',
+    __dirname + '/views/report',
     __dirname + '/views/user' 
 ])
 app.set('view engine', 'ejs')
@@ -109,6 +126,10 @@ app.use(
     page_admin_maintenance,
     page_admin_room,
     page_admin_repair_history,
+    page_admin_stock,
+    page_admin_cart,
+    page_admin_my_history_withdraw,
+    page_admin_all_history_withdraw,
 
     page_user_view_category_device,
     page_user_room,
@@ -120,6 +141,8 @@ app.use(
     add_device,
     add_category,
     add_room,
+    add_product,
+    add_order,
     // แก้ไขข้อมูล
     edit_faculty,
     edit_branch,
@@ -127,6 +150,8 @@ app.use(
     edit_category,
     edit_user,
     edit_room,
+    edit_product,
+    edit_order,
     // ลบข้อมูล
     delete_user,
     delete_category,
@@ -135,9 +160,13 @@ app.use(
     delete_device,
     delete_maintenance,
     delete_room,
+    delete_product,
+    delete_order,
     // ค้นหาข้อมูล
     search_user,
     search_category,
+    search_room,
+    search_product,
     search_maintenance,
     search_device,
     search_faculty,
@@ -145,9 +174,12 @@ app.use(
     search_list_inform,
     search_category_page_user,
     search_device_page_user,
+    search_room_page_user,
 
     ReportRepairHistory,
     ReportDevice,
+    report_my_withdraw,
+    report_all_withdraw,
 
     CheckMaintenance,
     ImportFileFaculty,
@@ -162,7 +194,8 @@ app.use(
     //re,
     report,
     
-    DetailInform
+    DetailInform,
+    withdraw
 )
 app.use(express.static(path.join(__dirname, 'public')))
 

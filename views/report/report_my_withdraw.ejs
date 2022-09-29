@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+/* table {
+    border-collapse: collapse;
+}
+th {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+td {
+    height: 25px;
+} */
+</style>
+
+<body>
+    <p style="text-align:right; font-size:10px">
+        Print Date <%= date %>
+    </p>
+    <br>
+    <p style="text-align: center; font-size: 14px;">
+        รายการข้อมูลเบิกผลิตภัณฑ์ <%= start_date %> ถึง <%= end_date %>
+    </p>
+    <br>
+    <table style="width:90%; margin-left: auto; margin-right: auto; font-size: 12px;">
+        <tr>
+            <th>#</th>
+            <th>ชื่อผลิตภัณฑ์</th>
+            <th style="text-align: center;">จำนวน</th>
+            <th style="text-align: center;">วันที่</th>
+            <th>ผู้เบิก</th>
+        </tr>
+        <% Object.values(data).forEach(function(item,i){%>
+            <tr>
+                <td style="text-align: center;">
+                    <%= order++ %>
+                </td>
+                <td style="padding-left: 9px;">
+                    <% let id=item.product_id %>
+                        <% for(var i=0; i < product.length; i++) {%>
+                            <% if (product[i]._id.toString()==id.toString()) { %>
+                            <%= product[i].product_name %>
+                        <% } %>
+                    <% } %>
+                </td>
+                <td style="text-align: center;">
+                    <%= item.product_number %>
+                </td>
+                <td style="text-align: center;">
+                    <%= item.date_withdraw.toLocaleString('th-TH') %>
+                </td>
+                <td style="padding-left: 9px;">
+                    <% for(var i=0; i < user.length; i++) {%>
+                        <% if (user[i]._id.toString()==item.user_id.toString()) { %>
+                            <%= user[i].FirstName %> <%= user[i].LastName %>
+                        <% } %>
+                    <% } %>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+
+</html>

@@ -24,6 +24,7 @@ router.post('/login', (req, res) => {
                 res.redirect("/list_inform")
             }
             else if (username === doc.UserName && password === doc.Password && doc.TypeUser == '00') {
+                req.session.userid = doc._id
                 req.session.username = username
                 req.session.password = password
                 req.session.fname = doc.FirstName
@@ -32,6 +33,17 @@ router.post('/login', (req, res) => {
                 req.session.typeUser = 'Admin'
                 req.session.login = true
                 res.redirect("/user")
+            }
+            else if (username === doc.UserName && password === doc.Password && doc.TypeUser == '02') {
+                req.session.userid = doc._id
+                req.session.username = username
+                req.session.password = password
+                req.session.fname = doc.FirstName
+                req.session.lname = doc.LastName
+                req.session.phone = doc.PhoneNumber
+                req.session.typeUser = 'Technician'
+                req.session.login = true
+                res.redirect("/stock")
             }
             else {
                 res.redirect("/")

@@ -54,6 +54,7 @@ td {
         <tr>
             <th style="width: 40px; text-align: center;">#</th>
             <th style="width: 150px; text-align: center;">วันที่</th>
+            <th style="text-align: center;">ผู้แจ้ง</th>
             <th style="text-align: center;">รายละเอียดการแจ้งซ่อม</th>
             <th style="text-align: center;">สาเหตุการซ่อม</th>
         </tr>
@@ -65,10 +66,14 @@ td {
                 <td style="text-align: center;">
                     <%= item.MTN_Date.toLocaleString('th-TH') %>
                 </td>
-                <td style="width: 250px; word-break:break-all; padding-left: 9px;">
+                <td style="padding-left: 9px;">
+                    <%= item.UserFirstName %>
+                    <%= item.UserLastName %>
+                </td>
+                <td style="word-break:break-all; padding-left: 9px;">
                     <%= item.MTN_Detail %>
                 </td>
-                <td style="width: 250px; word-break:break-all; padding-left: 9px;">
+                <td style="word-break:break-all; padding-left: 9px;">
                     <%= item.MTN_Cause %>
                 </td>
             </tr>

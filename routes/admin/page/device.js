@@ -5,11 +5,12 @@ const router = express.Router()
 
 router.get("/device", (req, res) => {
     const showname = req.session.username
-    if (req.session.login && req.session.typeUser == 'Admin') {
+    if (req.session.login && (req.session.typeUser == 'Admin' || req.session.typeUser == 'Technician')) {
         Device.find().exec((err, device) => {
             Maintenance.find().exec((err, maintenance) => {
                 if (req.cookies.dispose_fail) {
-                    res.render("device", { 
+                    res.render("device", {
+                        type_user: req.session.typeUser,
                         dispose_fail: true,
                         maintenance: maintenance,
                         devices: device,
@@ -19,7 +20,8 @@ router.get("/device", (req, res) => {
                     })
                 }
                 else {
-                    res.render("device", { 
+                    res.render("device", {
+                        type_user: req.session.typeUser,
                         dispose_fail: false,
                         maintenance: maintenance,
                         devices: device,

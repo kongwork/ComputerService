@@ -28,4 +28,15 @@ router.get("/CancelInform/:id", (req, res) => {
     })
 })
 
+router.post("/MultiCancelInform", (req, res) => {
+    const checkedItemId = req.body.deleteArray;
+    const splitArray = checkedItemId.split(",");
+    splitArray.forEach((item) => {
+        Maintenance.findByIdAndUpdate(item, { MTN_Status: "0" }).exec(err => {
+            if (!err) console.log(`Successfully cancel id: ${item}`);
+        });
+    });
+    res.redirect("/list_inform");
+});
+
 module.exports = router;

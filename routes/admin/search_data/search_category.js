@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const Category = require('../../../models/category')
+const Device = require("../../../models/device")
 
 router.post("/searchCategory", (req, res) => {
     const showname = req.session.username
@@ -11,13 +12,16 @@ router.post("/searchCategory", (req, res) => {
         res.redirect("/category")
     }
     else {
-        Category.find(query).exec((err, doc) => {
-            res.render("search_category", {
-                categorys: doc,
-                order: order,
-                showname: showname
+        Device.find().exec((err, device) => {
+            Category.find(query).exec((err, doc) => {
+                res.render("search_category", {
+                    devices: device,
+                    categorys: doc,
+                    order: order,
+                    showname: showname
+                })
+                console.log(doc)
             })
-            console.log(doc)
         })
     }
 })
