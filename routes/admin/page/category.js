@@ -8,11 +8,12 @@ router.get("/category", (req, res) => {
         console.log("Number of docs: ", count)
     })*/
     const showname = req.session.username
-    if (req.session.login && req.session.typeUser == 'Admin') {
+    if (req.session.login && (req.session.typeUser == 'Admin' || req.session.typeUser == 'Technician')) {
         let order = 1
         Category.find().exec((err, doc) => {
             Device.find().exec((err, doc_d) => {
-                res.render("category", { 
+                res.render("category", {
+                    type_user: req.session.typeUser,
                     categorys: doc,
                     devices: doc_d,
                     order: order,

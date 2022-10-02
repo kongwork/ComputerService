@@ -22,38 +22,65 @@
                 <p style="font-size: 20px; text-align: center;">
                     <b>Menu</b>
                 </p>
-                <a class="nav-link" href="/user" style="color: #333333;">
-                    <i class="bi bi-people"></i>
-                    User
-                </a>
-                <a class="nav-link" href="/faculty" style="color: #333333;">
-                    <i class="bi bi-journal-bookmark"></i>
-                    Faculty or Branch
-                </a>
-                <a class="nav-link" href="/room" style="color: #333333;">
-                    <i class="bi bi-hospital"></i>
-                    Room
-                </a>
-                <a class="nav-link" href="/category" style="color: #1a75ff; text-shadow: 0px 0px 5px #1a75ff"">
-                    <i class="bi bi-bookmarks"></i>
-                    Category
-                </a>
-                <a class="nav-link" href="/stock" style="color: #333333;">
-                    <i class="bi bi-box-seam"></i>
-                    Stock
-                </a>
-                <a class="nav-link position-relative" href="/cart" style="color: #333333;">
-                    <i class="bi bi-cart"></i>
-                    Cart
-                </a>
-                <a class="nav-link" href="/device" style="color: #333333;">
-                    <i class="bi bi-cpu"></i>
-                    Device
-                </a>
-                <a class="nav-link" href="/maintenance" style="color: #333333;">
-                    <i class="bi bi-wrench-adjustable"></i>
-                    Maintenance
-                </a>
+                <% if ( type_user=='Admin' ) { %>
+                    <a class="nav-link" href="/user" style="color: #333333;">
+                        <i class="bi bi-people"></i>
+                        User
+                    </a>
+                    <a class="nav-link" href="/faculty" style="color: #333333;">
+                        <i class="bi bi-journal-bookmark"></i>
+                        Faculty or Branch
+                    </a>
+                    <a class="nav-link" href="/room" style="color: #333333;">
+                        <i class="bi bi-hospital"></i>
+                        Room
+                    </a>
+                    <a class="nav-link" href="/category" style="color: #1a75ff; text-shadow: 0px 0px 5px #1a75ff"">
+                        <i class=" bi bi-bookmarks"></i>
+                        Category
+                    </a>
+                    <a class="nav-link" href="/stock" style="color: #333333;">
+                        <i class="bi bi-box-seam"></i>
+                        Stock
+                    </a>
+                    <a class="nav-link position-relative" href="/cart" style="color: #333333;">
+                        <i class="bi bi-cart"></i>
+                        Cart
+                    </a>
+                    <a class="nav-link" href="/device" style="color: #333333;">
+                        <i class="bi bi-cpu"></i>
+                        Device
+                    </a>
+                    <a class="nav-link" href="/maintenance" style="color: #333333;">
+                        <i class="bi bi-wrench-adjustable"></i>
+                        Maintenance
+                    </a>
+                <% } else { %>
+                    <a class="nav-link" href="/stock" style="color: #333333;">
+                        <i class="bi bi-box-seam"></i>
+                        Stock
+                    </a>
+                    <a class="nav-link position-relative" href="/cart" style="color: #333333;">
+                        <i class="bi bi-cart"></i>
+                        Cart
+                    </a>
+                    <a class="nav-link" href="/room" style="color: #333333;">
+                        <i class="bi bi-hospital"></i>
+                        Room
+                    </a>
+                    <a class="nav-link" href="/category" style="color: #1a75ff; text-shadow: 0px 0px 5px #1a75ff">
+                        <i class=" bi bi-bookmarks"></i>
+                        Category
+                    </a>
+                    <a class="nav-link" href="/device" style="color: #333333;">
+                        <i class="bi bi-cpu"></i>
+                        Device
+                    </a>
+                    <a class="nav-link" href="/maintenance" style="color: #333333;">
+                        <i class="bi bi-wrench-adjustable"></i>
+                        Maintenance
+                    </a>
+                <% } %>
             </nav>
             <div class="full-height">
                 <br>
@@ -63,6 +90,7 @@
                     </div>
                     <div class="col-5" style="margin: auto;">
                         <div style="float: right;">
+                            <% if ( type_user=='Admin' ) { %>
                             <button name='modal' type="button" class="btn bt-add me-1" data-bs-toggle="modal" data-bs-target="#ModalAddCategory">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
@@ -76,6 +104,7 @@
                                 </svg>
                                 ลบข้อมูล
                             </button>
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -103,13 +132,16 @@
                             <th>หมวดหมู่</th>
                             <th style="text-align: center;">จำนวนอุปกรณ์</th>
                             <th style="text-align: center;"></th>
-                            <th style="text-align: center;"></th>
-                            <th style="text-align: center;">
-                                <input class="form-check-input" type="checkbox" onclick="CheckAll(this);">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
-                                    <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
-                                </svg>
-                            </th>
+                            <% if ( type_user=='Admin' ) { %>
+                                <th style="text-align: center;"></th>
+                                <th style="text-align: center;"></th>
+                                <th style="text-align: center;">
+                                    <input class="form-check-input" type="checkbox" onclick="CheckAll(this);">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
+                                        <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
+                                    </svg>
+                                </th>
+                            <% } %>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,33 +159,40 @@
                                 <% } %>
                                 <%= num %>
                             </td>
-                            <td style="text-align: center;">
-                                <button class="btn edit-category" type="button" data-id="<%= item._id %>" data-bs-toggle="modal" data-bs-target="#ModalEditCategory">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                    </svg>
-                                </button>
+                            <td style="text-align: center">
+                                    <a class="btn btn-outline-primary" href="/category/device/<%= item._id %>">
+                                        อุปกรณ์
+                                    </a>
                             </td>
-                            <td style="text-align: center;">
-                                <a class="btn" href="/delete_category/<%= item._id %>" onclick="return confirm('ต้องการที่จะลบข้อมูล ?');">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
-                                        viewBox="0 0 16 16">
-                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                        <path fill-rule="evenodd"d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                    </svg>
-                                </a>
-                            </td>
-                            <td style="text-align: center;">
-                                <form>
-                                    <input class="form-check-input check-delete" type="checkbox" name='StockID-<%= i %>' value="<%= item._id %>" onclick="checkDelete();">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                    </label>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
-                                    </svg>
-                                </form>
-                            </td>
+                            <% if ( type_user=='Admin' ) { %>
+                                <td style="text-align: center;">
+                                    <button class="btn edit-category" type="button" data-id="<%= item._id %>" data-bs-toggle="modal" data-bs-target="#ModalEditCategory">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                        </svg>
+                                    </button>
+                                </td>
+                                <td style="text-align: center;">
+                                    <a class="btn" href="/delete_category/<%= item._id %>" onclick="return confirm('ต้องการที่จะลบข้อมูล ?');">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                                            viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                            <path fill-rule="evenodd"d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                        </svg>
+                                    </a>
+                                </td>
+                                <td style="text-align: center;">
+                                    <form>
+                                        <input class="form-check-input check-delete" type="checkbox" name='StockID-<%= i %>' value="<%= item._id %>" onclick="checkDelete();">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        </label>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                        </svg>
+                                    </form>
+                                </td>
+                            <% } %>
                         </tr>
                         <% }) %>
                         <form action="/MultiDeleteCategory" method="post" id="gg">

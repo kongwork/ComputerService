@@ -17,6 +17,7 @@ router.post("/search-room", (req, res) => {
                 Branch.find().exec((err, branch) => {
                     Room.find(query).sort({r_name: 1}).exec((err, room) => {
                         res.render("room",{
+                            type_user: req.session.typeUser,
                             showname: req.session.username,
                             order: 1,
                             device: device,

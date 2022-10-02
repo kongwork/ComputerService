@@ -22,6 +22,8 @@ const page_admin_stock = require("./routes/admin/page/stock")
 const page_admin_cart = require("./routes/admin/page/cart")
 const page_admin_my_history_withdraw = require("./routes/admin/page/my_history_withdraw")
 const page_admin_all_history_withdraw = require("./routes/admin/page/all_history_withdraw")
+const page_admin_device_in_category = require("./routes/admin/page/view_device_in_category")
+const page_admin_device_in_room = require("./routes/admin/page/view_device_in_room")
 
 const add_user = require("./routes/admin/form_add_data/user")
 const add_faculty = require("./routes/admin/form_add_data/faculty")
@@ -130,6 +132,8 @@ app.use(
     page_admin_cart,
     page_admin_my_history_withdraw,
     page_admin_all_history_withdraw,
+    page_admin_device_in_category,
+    page_admin_device_in_room,
 
     page_user_view_category_device,
     page_user_room,
