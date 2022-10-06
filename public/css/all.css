@@ -104,3 +104,8 @@ td {
     color: #3873ad;
     text-decoration: none;
 }
+
+.nav-hl{
+    color: #1a75ff;
+    text-shadow: 0px 0px 5px #1a75ff
+}

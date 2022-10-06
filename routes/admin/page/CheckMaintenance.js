@@ -21,6 +21,7 @@ router.post("/CheckMaintenance/:id", (req, res) => {
                                 Branch.findOne({ _id: user_detail.BranchID }).exec((err, user_detail_branch) => {
                                     Faculty.findOne({ _id: user_detail.FacultyID }).exec((err, user_detail_faculty) => {
                                         res.render("CheckMaintenance", {
+                                            type_user: req.session.typeUser,
                                             user_detail: user_detail,
                                             user_detail_faculty: user_detail_faculty,
                                             user_detail_branch: user_detail_branch,

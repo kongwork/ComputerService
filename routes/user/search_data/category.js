@@ -13,7 +13,7 @@ router.post("/search-category-page-user", (req, res) => {
     else {
         Category.find(query).exec((err, doc) => {
             Device.find().exec((err, device) => {
-                res.render("search_category_page_user", {
+                res.render("user_category", {
                     devices: device,
                     categorys: doc,
                     order: 1,
