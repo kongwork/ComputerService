@@ -11,7 +11,7 @@ router.post("/search-device-page-user", (req, res) => {
     }
     else {
         Device.find(query).exec((err, doc) => {
-            res.render("search_device_page_user", {
+            res.render("user_device", {
                 devices: doc,
                 order: 1,
                 showname: showname
