@@ -77,7 +77,14 @@
                             <td vertical-align: bottom;><%= order++ %></td>
                             <td><%= item.DeviceCode %></td>
                             <td><%= item.DeviceName %></td>
-                            <td><%= item.CategoryName %></td>
+                            <td>
+                                <% for(var i=0; i < category.length; i++) {%>
+                                    <% if (category[i]._id.toString() == item.CategoryID.toString()) { %>
+                                        <%= category[i].CategoryName %>
+                                        <% break %>
+                                    <% } %>
+                                <% } %>
+                            </td>
                             <!-- <td><%# JSON.stringify(item.details,[ 'details', 'CategoryName']).slice(18,-3); %></td> -->
                             <td style="text-align: center;">
                                 <% if (item.DeviceStatus == '0' ) { %>

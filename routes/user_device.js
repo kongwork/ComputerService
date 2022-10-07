@@ -1,15 +1,19 @@
 const express = require("express")
 const router = express.Router()
 const Device = require('../models/device')
+const Category = require('../models/category')
 
 router.get("/user_device", (req, res) => {
     const showname = req.session.username
     if (req.session.login && req.session.typeUser === 'User') {
-        Device.find().exec((err, device) => {
-            res.render("user_device", {
-                devices: device,
-                order: 1,
-                showname: showname
+        Category.find().exec((err, category) => {
+            Device.find().exec((err, device) => {
+                res.render("user_device", {
+                    category: category,
+                    devices: device,
+                    order: 1,
+                    showname: showname
+                })
             })
         })
         // let order = 1
