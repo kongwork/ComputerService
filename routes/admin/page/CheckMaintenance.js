@@ -174,6 +174,12 @@ router.post("/ConfirmMaintenance/:UserID", (req, res) => {
                                                     ${docMTN.MTN_Detail}
                                                 </p>
                                             </div>
+                                            <h3>สาเหตุอาการเสีย</h3>
+                                            <div style="padding: 0 33px;">
+                                                <p style="font-size: 15px;">
+                                                    ${req.body.cause}
+                                                </p>
+                                            </div>
                                         </div>        
                                     `,
                                 };
