@@ -9,7 +9,7 @@ router.get("/maintenance", (req, res) => {
     if (req.session.login && (req.session.typeUser == 'Admin' || req.session.typeUser == 'Technician')) {
         Device.find().exec((err, device) => {
             Room.find().exec((err, room) => {
-                Maintenance.find().exec((err, doc) => {
+                Maintenance.find().sort({MTN_Date: -1}).exec((err, doc) => {
                     res.render("maintenance", {
                         type_user: req.session.typeUser,
                         order: order = 1,
