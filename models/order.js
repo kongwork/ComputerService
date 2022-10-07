@@ -14,7 +14,8 @@ let orderSchema = mongoose.Schema({
     user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
     product_id: { type: mongoose.Schema.Types.ObjectId, ref: 'stock' },
     product_number: Number,
-    date_withdraw: Date
+    date_withdraw: Date,
+    status: String
 });
 
 // create model

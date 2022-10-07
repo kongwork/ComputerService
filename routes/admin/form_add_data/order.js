@@ -8,7 +8,8 @@ router.post("/add-order", (req, res) => {
         user_id: req.session.userid,
         product_id: req.body.id,
         product_number: req.body.order_number,
-        date_withdraw: ''
+        date_withdraw: '',
+        status: ''
     })
     Order.saveOrder(data, (err) => {
         if (err) console.log(err)

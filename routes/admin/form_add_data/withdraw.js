@@ -22,20 +22,21 @@ router.get("/withdraw", (req, res) => {
                 res.redirect("/cart")
             }
             else {
-                for(let index_order=0; index_order < order.length; index_order++) {
-                    for(let i=0; i < product.length; i++) {
-                        if (product[i]._id.toString() == order[index_order].product_id.toString()) {
-                            let data = {
-                               product_number: product[i].product_number - order[index_order].product_number
-                            }
-                            Product.findByIdAndUpdate(product[i]._id, data, { useFindAndModify: false }, function (err) {
-                                if (!err) console.log(`Successfully Update Product ID: ${product[i]._id}`)
-                            })
-                        }
-                    }
-                }
+                // for(let index_order=0; index_order < order.length; index_order++) {
+                //     for(let i=0; i < product.length; i++) {
+                //         if (product[i]._id.toString() == order[index_order].product_id.toString()) {
+                //             let data = {
+                //                product_number: product[i].product_number - order[index_order].product_number
+                //             }
+                //             Product.findByIdAndUpdate(product[i]._id, data, { useFindAndModify: false }, function (err) {
+                //                 if (!err) console.log(`Successfully Update Product ID: ${product[i]._id}`)
+                //             })
+                //         }
+                //     }
+                // }
                 let data = {
-                    date_withdraw: Date.now()
+                    date_withdraw: Date.now(),
+                    status: '1'
                 }
                 // อัพเดตข้อมูล
                 Order.updateMany({ user_id: req.session.userid, date_withdraw: null }, data, { useFindAndModify: false } ).exec(err => {

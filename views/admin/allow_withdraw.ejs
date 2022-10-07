@@ -86,10 +86,10 @@
                 <br>
                 <div class="row">
                     <div class="col">
-                        <h1>รายการเบิก</h1>
+                        <h1>รายการเบิกรออนุมัติ</h1>
                     </div>
                     <div class="col-5" style="margin: auto;">
-                        <div style="float: right;">
+                        <!-- <div style="float: right;">
                             <button type="button" class="btn bt-add" data-bs-toggle="modal" data-bs-target="#withdraw" style="white-space: nowrap;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-plus" viewBox="0 0 16 16">
                                     <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855a.75.75 0 0 0-.124 1.329l4.995 3.178 1.531 2.406a.5.5 0 0 0 .844-.536L6.637 10.07l7.494-7.494-1.895 4.738a.5.5 0 1 0 .928.372l2.8-7Zm-2.54 1.183L5.93 9.363 1.591 6.602l11.833-4.733Z"/>
@@ -104,17 +104,17 @@
                                 </svg>
                                 ลบรายการ
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <hr>
                 <br>
                 <% if ( type_user=='Admin' ) { %>
                     <div class="btn-group" style="width: 100%; margin-bottom: 30px;">
-                        <a href="#" class="btn btn-primary active" aria-current="page">รายการเบิก</a>
-                        <a href="/page-allow-withdraw" class="btn btn-outline-primary" aria-current="page">อนุมัติรายการเบิก</a>
+                        <a href="/cart" class="btn btn-outline-primary">รายการเบิก</a>
+                        <a href="#" class="btn btn-outline-primary active">อนุมัติรายการเบิก</a>
                         <a href="/my-history-withdraw" class="btn btn-outline-primary">ประวัติการเบิกของฉัน</a>
-                        <a href="/all-history-withdraw" class="btn btn-outline-primary" aria-current="page">ประวัติการเบิกทั้งหมดในระบบ</a>
+                        <a href="/all-history-withdraw" class="btn btn-outline-primary">ประวัติการเบิกทั้งหมดในระบบ</a>
                     </div>
                 <% } else { %>
                     <div class="btn-group" style="width: 100%; margin-bottom: 30px;">
@@ -126,7 +126,7 @@
                     <br>
                     <div class="alert alert-danger" role="alert" style="text-align: center;">
                         <i class="bi bi-exclamation-triangle" style="margin-right: 10px;"></i>
-                        จำนวนของผลิตภัณฑ์บางรายการไม่เพียงพอที่จะเบิก
+                        จำนวนของผลิตภัณฑ์ไม่เพียงพอที่จะเบิก
                     </div>
                     <br>
                 <% } %>
@@ -137,14 +137,8 @@
                                 <th>#</th>
                                 <th>ชื่อผลิตภัณฑ์</th>
                                 <th style="text-align: center;">จำนวน</th>
+                                <th>ผู้เบิก</th>
                                 <th></th>
-                                <th></th>
-                                <th>
-                                    <input class="form-check-input" type="checkbox" onclick="CheckAll(this);">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
-                                        <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992a.252.252 0 0 1 .02-.022zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486-.943 1.179z"/>
-                                    </svg>
-                                </th>
                             </tr>
                         <% } else { %>
                             <div class="alert alert-danger " role="alert" style="text-align: center">
@@ -166,32 +160,17 @@
                                 <% } %>
                             </td>
                             <td style="text-align: center;"><%= item.product_number %></td>
-                            <td style="text-align: center;">
-                                <button class="btn edit-order" type="button" data-bs-toggle="modal" data-bs-target="#modal-edit-order"
-                                    data-id="<%= item._id %>" data-number="<%= item.product_number %>">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                    </svg>
-                                </button>
-                            </td>
-                            <td style="text-align: center;">
-                                <a class="btn" href="/delete-order/<%= item._id %>" onclick="return confirm('ต้องการที่จะลบข้อมูล ?')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                        <path fill-rule="evenodd"d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                    </svg>
-                                </a>
-                            </td>
                             <td>
-                                <form>
-                                    <input class="form-check-input check-delete" type="checkbox" name='StockID-<%= i %>' value="<%= item._id %>" onclick="checkDelete();">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                    </label>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
-                                    </svg>
-                                </form>
+                                <% for(var i=0; i < user.length; i++) {%>
+                                    <% if (user[i]._id.toString() == item.user_id.toString()) { %>
+                                        <%= user[i].FirstName %> <%= user[i].LastName %>
+                                    <% } %>
+                                <% } %>
+                            </td>
+                            <td style="text-align: center;">
+                                <a class="btn btn-outline-success" href="/allow-withdraw/<%= item._id %>" onclick="return confirm('อนุมัติหรือไม่')">
+                                    อนุมัติ
+                                </a>
                             </td>
                         </tr>
                         <% }) %>

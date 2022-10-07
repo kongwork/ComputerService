@@ -8,7 +8,7 @@ router.get("/all-history-withdraw", (req, res) => {
     if (req.session.login && req.session.typeUser == 'Admin') {
         User.find().exec((err, user) => {
             Stock.find().exec((err, stock) => {
-                Order.find({ date_withdraw: { $ne: null }}).exec((err, order) => {
+                Order.find({date_withdraw: { $ne: null }}).sort({date_withdraw : -1}).exec((err, order) => {
                     res.render("all_history_withdraw", {
                         user: user,
                         stock: stock,

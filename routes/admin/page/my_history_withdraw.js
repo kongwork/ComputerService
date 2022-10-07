@@ -6,7 +6,7 @@ const Stock = require("../../../models/product")
 router.get("/my-history-withdraw", (req, res) => {
     if (req.session.login && (req.session.typeUser == 'Admin' || req.session.typeUser == 'Technician')) {
         Stock.find().exec((err, stock) => {
-            Order.find({ user_id: req.session.userid, date_withdraw: { $ne: null } /*order_id: { $ne: '' }*/ }).exec((err, order) => {
+            Order.find({ user_id: req.session.userid, date_withdraw: { $ne: null } /*order_id: { $ne: '' }*/ }).sort({date_withdraw: -1}).exec((err, order) => {
                 res.render("my_history_withdraw", {
                     type_user: req.session.typeUser,
                     stock: stock,

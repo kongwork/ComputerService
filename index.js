@@ -24,6 +24,7 @@ const page_admin_my_history_withdraw = require("./routes/admin/page/my_history_w
 const page_admin_all_history_withdraw = require("./routes/admin/page/all_history_withdraw")
 const page_admin_device_in_category = require("./routes/admin/page/view_device_in_category")
 const page_admin_device_in_room = require("./routes/admin/page/view_device_in_room")
+const page_admin_allow_withdraw = require("./routes/admin/page/allow_withdraw")
 
 const add_user = require("./routes/admin/form_add_data/user")
 const add_faculty = require("./routes/admin/form_add_data/faculty")
@@ -33,6 +34,7 @@ const add_device = require("./routes/admin/form_add_data/device")
 const add_room = require("./routes/admin/form_add_data/room")
 const add_product = require("./routes/admin/form_add_data/product")
 const add_order = require("./routes/admin/form_add_data/order")
+const allow_withdraw = require("./routes/admin/form_add_data/allow_withdraw")
 
 const edit_user = require("./routes/admin/edit_data/user")
 const edit_faculty = require("./routes/admin/edit_data/faculty")
@@ -134,6 +136,7 @@ app.use(
     page_admin_all_history_withdraw,
     page_admin_device_in_category,
     page_admin_device_in_room,
+    page_admin_allow_withdraw,
 
     page_user_view_category_device,
     page_user_room,
@@ -147,6 +150,7 @@ app.use(
     add_room,
     add_product,
     add_order,
+    allow_withdraw,
     // แก้ไขข้อมูล
     edit_faculty,
     edit_branch,

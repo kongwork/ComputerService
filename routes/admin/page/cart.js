@@ -6,7 +6,7 @@ const Stock = require("../../../models/product")
 router.get("/cart", (req, res) => {
     if (req.session.login && (req.session.typeUser == 'Admin' || req.session.typeUser == 'Technician')) {
         Stock.find().exec((err, stock) => {
-            Order.find({ user_id: req.session.userid, date_withdraw: null }).exec((err, order) => {
+            Order.find({ user_id: req.session.userid, status: '' }).exec((err, order) => {
                 if (req.cookies.order_fail) {
                     res.render("cart", {
                         type_user: req.session.typeUser,

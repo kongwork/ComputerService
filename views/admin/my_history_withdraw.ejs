@@ -103,6 +103,7 @@
                 <% if ( type_user=='Admin' ) { %>
                     <div class="btn-group" style="width: 100%; margin-bottom: 30px;">
                         <a href="/cart" class="btn btn-outline-primary">รายการเบิก</a>
+                        <a href="/page-allow-withdraw" class="btn btn-outline-primary" aria-current="page">อนุมัติรายการเบิก</a>
                         <a href="#" class="btn btn-primary active" aria-current="page">ประวัติการเบิกของฉัน</a>
                         <a href="all-history-withdraw" class="btn btn-outline-primary" aria-current="page">ประวัติการเบิกทั้งหมดในระบบ</a>
                     </div>
@@ -120,6 +121,7 @@
                                 <th>ชื่อผลิตภัณฑ์</th>
                                 <th style="text-align: center;">จำนวน</th>
                                 <th style="text-align: center;">วันที่</th>
+                                <th style="text-align: center;">สถานะ</th>
                             </tr>
                         <% } else { %>
                             <div class="alert alert-danger " role="alert" style="text-align: center">
@@ -141,7 +143,26 @@
                                 <% } %>
                             </td>
                             <td style="text-align: center;"><%= item.product_number %></td>
-                            <td style="text-align: center;"><%= item.date_withdraw.toLocaleString('th-TH') %></td>
+                            <td style="text-align: center;">
+                                <% if (item.date_withdraw != null) { %>
+                                    <%= item.date_withdraw.toLocaleString('th-TH') %>
+                                <% } %>
+                            </td>
+                            <td style="text-align: center;">
+                                <% if (item.status == '1' ) { %>
+                                    <span class="badge rounded-pill bg-warning">
+                                        รออนุมัติ
+                                    </span>
+                                <% } else if (item.status == '2' ) { %>
+                                    <span class="badge rounded-pill bg-success">
+                                        อนุมัติแล้ว
+                                    </span>
+                                <% } else { %>
+                                    <span class="badge rounded-pill bg-danger">
+                                        error 404
+                                    </span>
+                                <% } %>
+                            </td>
                         </tr>
                         <% }) %>
                     </tbody>
